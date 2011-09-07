@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1315297336 source:c:\users\hannes\sfml\supermegaawesomezombieslayer\main.cpp
+	<iostream>
+	<SFML/Graphics.hpp>
+

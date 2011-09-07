@@ -1,0 +1,15 @@
+bazooka:
+	damage: 10
+	range: 10
+	wmodel: "bazooka.png"
+	projectile: "rocket"
+	splash:
+		enabled: true
+		area: 5
+ak47:
+	damage: 5
+	range: 7
+	wmodel: "ak47.png"
+	projectile: "bullet"
+	splash:
+		enabled: false
