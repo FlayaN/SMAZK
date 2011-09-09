@@ -9,7 +9,7 @@ using namespace std;
 int main()
 {
     // Create the main rendering window
-    sf::RenderWindow game(sf::VideoMode(SCREEN_SIZE_WIDTH, SCREEN_SIZE_HEIGHT, SCREEN_BIT_SIZE), "Super Mega Awesome Zombie Slayer");
+    sf::RenderWindow game(sf::VideoMode(SCREEN_SIZE_WIDTH, SCREEN_SIZE_HEIGHT, SCREEN_BIT_SIZE), "Super Mega Awesome Zombie Killer");
 
     //Using clock to limit framerate
     sf::Clock clock;
