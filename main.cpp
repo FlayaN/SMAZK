@@ -1,7 +1,6 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 using namespace std;
-//test
 //Defines constants
 #define SCREEN_SIZE_WIDTH   800
 #define SCREEN_SIZE_HEIGHT  600
