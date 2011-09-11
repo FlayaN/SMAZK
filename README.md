@@ -1,6 +1,6 @@
-SPAZK
+SMAZK
 =========
-SPAZK is short for Super Mega Awesome Zombie Killer which is a school project.
+SMAZK is short for Super Mega Awesome Zombie Killer which is a school project.
 
 Dependencies
 ============
