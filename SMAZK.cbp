@@ -39,8 +39,10 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="Config.cpp" />
+		<Unit filename="Config.hpp" />
 		<Unit filename="Decals.cpp" />
 		<Unit filename="Enemy.cpp" />
+		<Unit filename="Enemy.hpp" />
 		<Unit filename="Game.cpp" />
 		<Unit filename="Gui.cpp" />
 		<Unit filename="MovingEntity.cpp" />
