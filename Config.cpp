@@ -1,27 +1,11 @@
 #include <Windows.h>
 #include <string>
-class Config
+std::string Config::getString(std::string name)
 {
-public:
+    return GetPrivateProfileString(type, name, "error", inifile);
+}
 
-    Config(string inifile, string type)
-    {
-        this.inifile = inifile;
-        this.type = type;
-    }
-
-    string getString(string name)
-    {
-        return GetPrivateProfileString(type, name, "error", inifile);
-    }
-
-    int getHP(string name)
-    {
-        return GetPrivateProfileInt(type, name, 10, inifile);
-    }
-
-private:
-
-    string inifile;
-    string type;
+int Config::getInt(std::string name)
+{
+    return GetPrivateProfileInt(type, name, 10, inifile);
 }
