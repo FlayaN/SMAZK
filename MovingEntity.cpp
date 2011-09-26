@@ -1,4 +1,3 @@
-#include <SFML/Graphics.hpp>
 #include <"MovingEntity.hpp">
 
 float MovingEntity::getSpeed()

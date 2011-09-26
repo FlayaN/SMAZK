@@ -1,5 +1,4 @@
 #include <iostream>
-#include <SFML/Graphics.hpp>
 using namespace std;
 //Defines constants
 #define SCREEN_SIZE_WIDTH   800
