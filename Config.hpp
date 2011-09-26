@@ -1,17 +1,19 @@
-#include <Windows.h>
-#include <string>
+#ifndef CONFIG_H
+#define CONFIG_H
 class Config
 {
 public:
 
-    Config(std::string inifile, std::string type):inifile(inifile), type(type){};
+    Config(char* fileName, char* Category);
 
-    std::string getString(std::string name);
-
-    int getInt(string name);
+    int getInt(char* Key, int DefaultValue);
+    float getFloat(char* Key, float DefaultValue);
+    bool getBool(char* Key, bool DefaultValue);
+    char* getString(char* Key, const char* DefaultValue);
 
 private:
 
-    std::string inifile;
-    std::string type;
+    char m_fileName[255];
+    char m_Category[255];
 }
+#endif
