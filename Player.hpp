@@ -11,7 +11,7 @@ class Player : public MovingEntity
   {
       return this.health;
   }
-  int setHealth(int health)
+  void setHealth(int health)
   {
       this.health = health;
   }

@@ -3,7 +3,6 @@
 class MovingEntity : public sf::Sprite
 {
     public:
-
         virtual ~MovingEntity() = 0;
         MovingEntity(float speed=10) : speed(speed) {}
 
@@ -11,20 +10,12 @@ class MovingEntity : public sf::Sprite
         virtual setHealth(int health) = 0;
 
     protected:
-
         //return the current speed
-        float getSpeed()
-        {
-            return this.speed;
-        }
+        float getSpeed;
 
         //set the current speed
-        void setSpeed(float speed)
-        {
-            this.speed = speed;
-        }
+        void setSpeed(float speed);
 
     private:
-
         float speed;
 };

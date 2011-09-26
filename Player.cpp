@@ -1,22 +1,11 @@
-class Player : public MovingEntity
+#include <"Player.hpp">
+
+int Player::getHealth()
 {
-  public:
+    return this.health;
+}
+void Player::setHealth(int health)
+{
+    this.health = health;
+}
 
-  Player(float speed, int health)
-  : MovingEntity(speed), health(health) {}
-
-  protected:
-
-  int getHealth()
-  {
-      return this.health;
-  }
-  int setHealth(int health)
-  {
-      this.health = health;
-  }
-
-  private:
-
-  int health;
-};
