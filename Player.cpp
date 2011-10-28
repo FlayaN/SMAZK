@@ -1,11 +1,11 @@
-#include <"Player.hpp">
+#include "Player.hpp"
 
 int Player::getHealth()
 {
-    return this.health;
+    return health;
 }
 void Player::setHealth(int health)
 {
-    this.health = health;
+    this->health = health;
 }
 

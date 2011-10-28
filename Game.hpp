@@ -1,10 +1,1 @@
-class Game
-{
-	 Game(){
-	 }
-	 
 
-
-
-
-}

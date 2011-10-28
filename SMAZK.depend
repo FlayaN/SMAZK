@@ -3,11 +3,47 @@
 	<iostream>
 	<SFML/Graphics.hpp>
 
-1315397559 source:c:\users\yngve\smazk\main.cpp
+1319808111 source:c:\users\yngve\smazk\main.cpp
 	<iostream>
 	<SFML/Graphics.hpp>
+	"Game.cpp"
 
 1315572064 source:c:\users\yngve\smazk\config.cpp
 
 1315572064 source:c:\users\yngve\smazk\decals.cpp
+
+1319809791 source:c:\users\yngve\smazk\enemy.cpp
+	<string>
+	"Enemy.hpp"
+
+1319810126 c:\users\yngve\smazk\enemy.hpp
+	<string>
+	"MovingEntity.hpp"
+
+1319812612 c:\users\yngve\smazk\movingentity.hpp
+	<SFML/Graphics.hpp>
+
+1319812423 source:c:\users\yngve\smazk\game.cpp
+	<vector>
+	<algorithm>
+	<iterator>
+	<SFML/Graphics.hpp>
+	"Enemy.hpp"
+	"Player.hpp"
+	<cmath>
+
+1319809812 source:c:\users\yngve\smazk\movingentity.cpp
+	"MovingEntity.hpp"
+
+1319812316 c:\users\yngve\smazk\game.cpp
+	<vector>
+	<algorithm>
+	<iterator>
+	<SFML/Graphics.hpp>
+	"Enemy.hpp"
+	"Player.hpp"
+	<cmath>
+
+1319812676 c:\users\yngve\smazk\player.hpp
+	"MovingEntity.hpp"
 

@@ -1,11 +1,12 @@
 #include <string>
-#include <"Enemy.hpp">
+#include "Enemy.hpp"
+
+
 int Enemy::getHealth()
 {
-    return this.health;
+    return health;
 }
 void Enemy::setHealth(int health)
 {
-    this.health = health;
+    health = health;
 }
-};

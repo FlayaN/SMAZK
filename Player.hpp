@@ -1,20 +1,19 @@
+#include "MovingEntity.hpp"
+
 class Player : public MovingEntity
 {
   public:
+
+    Player(){}
 
   Player(float speed, int health)
   : MovingEntity(speed), health(health) {}
 
   protected:
 
-  int getHealth()
-  {
-      return this.health;
-  }
-  void setHealth(int health)
-  {
-      this.health = health;
-  }
+  int getHealth();
+
+  void setHealth(int health);
 
   private:
 
