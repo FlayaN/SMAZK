@@ -3,9 +3,14 @@
 class Config
 {
 public:
-
-    Config(char* fileName, char* Category);
-
+    //Config(char* fileName, char* Category);
+    vector<EnemyType> getEnemys();
+    vector<ProjectileType> getProjectiles();
+    vector<WeaponType> getWeapons();
+    vector<PowerUpType> getPowerUps();
+    vector<DecalType> getDecals();
+    vector<ParticleType> getParticles();
+    void initConfig(char* filename);
     int getInt(char* Key, int DefaultValue);
     float getFloat(char* Key, float DefaultValue);
     bool getBool(char* Key, bool DefaultValue);
@@ -13,7 +18,7 @@ public:
 
 private:
 
-    char m_fileName[255];
-    char m_Category[255];
+    char* fileName = "";
+    char* category = "";
 }
 #endif
