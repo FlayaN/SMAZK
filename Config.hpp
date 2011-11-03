@@ -1,24 +1,24 @@
-#ifndef CONFIG_H
-#define CONFIG_H
+#include "EnemyType.hpp"
+#include "WeaponType.hpp"
+#include "ProjectileType.hpp"
+#include "PowerUpType.hpp"
+#include "DecalType.hpp"
+#include "ParticleType.hpp"
+#include <vector>
+#ifndef CONFIGqqq
+#define CONFIGqqq
 class Config
 {
 public:
-    //Config(char* fileName, char* Category);
-    vector<EnemyType> getEnemys();
-    vector<ProjectileType> getProjectiles();
-    vector<WeaponType> getWeapons();
-    vector<PowerUpType> getPowerUps();
-    vector<DecalType> getDecals();
-    vector<ParticleType> getParticles();
-    void initConfig(char* filename);
-    int getInt(char* Key, int DefaultValue);
-    float getFloat(char* Key, float DefaultValue);
-    bool getBool(char* Key, bool DefaultValue);
-    char* getString(char* Key, const char* DefaultValue);
-
-private:
-
-    char* fileName = "";
-    char* category = "";
-}
+    std::vector<EnemyType> getEnemys();
+    std::vector<ProjectileType> getProjectiles();
+    std::vector<WeaponType> getWeapons();
+    std::vector<PowerUpType> getPowerUps();
+    std::vector<DecalType> getDecals();
+    std::vector<ParticleType> getParticles();
+    int getInt(char* key, int defaultValue, char* category, char* fileName);
+    float getFloat(char* key, float defaultValue, char* category, char* fileName);
+    bool getBool(char* key, bool defaultValue, char* category, char* fileName);
+    char* getString(char* key, const char* defaultValue, char* category, char* fileName);
+};
 #endif
