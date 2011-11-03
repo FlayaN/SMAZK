@@ -9,8 +9,8 @@ class MovingEntity : public sf::Sprite
 public:
     MovingEntity(float speed=10, std::string name = "noname") : speed(speed), name(name) {}
 
-    virtual int getHealth() = 0;
-    virtual void setHealth(int health) = 0;
+    //virtual int getHp() = 0;
+    //virtual void setHp(int hp) = 0;
 
     float getSpeed();
     void setSpeed(float speed);

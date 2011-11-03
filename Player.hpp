@@ -1,21 +1,27 @@
 #include "MovingEntity.hpp"
+#include "Weapon.hpp"
+
+#ifndef PLAYERqqq
+#define PLAYERqqq
 
 class Player : public MovingEntity
 {
-  public:
-
+public:
     Player(){}
 
-  Player(float speed, int health)
-  : MovingEntity(speed), health(health) {}
+    Player(float speed, int hp, Weapon weapon): MovingEntity(speed), hp(hp) {}
 
-  protected:
+    int getHp();
 
-  int getHealth();
+    void setHp(int hp);
 
-  void setHealth(int health);
+    void updateTimers(float elapsedTime);
+    Weapon& getWeapon();
 
-  private:
+private:
 
-  int health;
+    Weapon weapon;
+    int hp;
 };
+
+#endif

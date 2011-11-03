@@ -1,6 +1,8 @@
 #include <string>
 #include "MovingEntity.hpp"
 
+#ifndef ENEMYqqq
+#define ENEMYqqq
 
 class Enemy : public MovingEntity
 {
@@ -15,3 +17,5 @@ public:
 private:
     int health;
 };
+
+#endif

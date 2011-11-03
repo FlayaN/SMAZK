@@ -38,34 +38,26 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="Config.cpp" />
 		<Unit filename="Config.hpp" />
-		<Unit filename="Decals.cpp" />
 		<Unit filename="Decals.hpp" />
 		<Unit filename="Enemy.cpp" />
 		<Unit filename="Enemy.hpp" />
 		<Unit filename="EnemyType.hpp" />
 		<Unit filename="Game.cpp" />
 		<Unit filename="Game.hpp" />
-		<Unit filename="Gui.cpp" />
 		<Unit filename="Gui.hpp" />
 		<Unit filename="MovingEntity.cpp" />
 		<Unit filename="MovingEntity.hpp" />
-		<Unit filename="NewGame.cpp" />
-		<Unit filename="Particles.cpp" />
 		<Unit filename="Particles.hpp" />
 		<Unit filename="Player.cpp" />
 		<Unit filename="Player.hpp" />
-		<Unit filename="PowerUps.cpp" />
 		<Unit filename="PowerUps.hpp" />
 		<Unit filename="Projectile.cpp" />
 		<Unit filename="Projectile.hpp" />
-		<Unit filename="Settings.cpp" />
 		<Unit filename="StillObject.cpp" />
 		<Unit filename="StillObject.hpp" />
-		<Unit filename="TextScreen.cpp" />
-		<Unit filename="Weapons.cpp" />
-		<Unit filename="Weapons.hpp" />
+		<Unit filename="Weapon.cpp" />
+		<Unit filename="Weapon.hpp" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

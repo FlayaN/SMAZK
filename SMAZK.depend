@@ -3,7 +3,7 @@
 	<iostream>
 	<SFML/Graphics.hpp>
 
-1320106855 source:c:\users\yngve\smazk\main.cpp
+1320325036 source:c:\users\yngve\smazk\main.cpp
 	<iostream>
 	<SFML/Graphics.hpp>
 	"Game.cpp"
@@ -12,44 +12,74 @@
 
 1315572064 source:c:\users\yngve\smazk\decals.cpp
 
-1320096131 source:c:\users\yngve\smazk\enemy.cpp
+1320067331 source:c:\users\yngve\smazk\enemy.cpp
 	<string>
 	"Enemy.hpp"
 
-1320108122 c:\users\yngve\smazk\enemy.hpp
+1320336153 c:\users\yngve\smazk\enemy.hpp
 	<string>
 	"MovingEntity.hpp"
 
-1320108295 c:\users\yngve\smazk\movingentity.hpp
+1320326141 c:\users\yngve\smazk\movingentity.hpp
 	<SFML/Graphics.hpp>
 	<string>
 
-1320107879 source:c:\users\yngve\smazk\game.cpp
+1320339324 source:c:\users\yngve\smazk\game.cpp
 	<vector>
 	<algorithm>
 	<iterator>
 	<SFML/Graphics.hpp>
 	"Enemy.hpp"
 	"Player.hpp"
+	"Weapon.hpp"
+	"Projectile.hpp"
 	<cmath>
 	<iostream>
 
-1320108327 source:c:\users\yngve\smazk\movingentity.cpp
+1320079527 source:c:\users\yngve\smazk\movingentity.cpp
 	"MovingEntity.hpp"
 
-1320108345 c:\users\yngve\smazk\game.cpp
+1320339796 c:\users\yngve\smazk\game.cpp
 	<vector>
 	<algorithm>
 	<iterator>
 	<SFML/Graphics.hpp>
 	"Enemy.hpp"
 	"Player.hpp"
+	"Weapon.hpp"
+	"Projectile.hpp"
 	<cmath>
 	<iostream>
 
-1320096131 c:\users\yngve\smazk\player.hpp
+1320336281 c:\users\yngve\smazk\player.hpp
+	"MovingEntity.hpp"
+	"Weapon.hpp"
+
+1320331991 source:c:\users\yngve\smazk\player.cpp
+	"Player.hpp"
+
+1320339661 c:\users\yngve\smazk\weapon.hpp
+	<string>
+	"StillObject.hpp"
+
+1320336911 c:\users\yngve\smazk\stillobject.hpp
+	<SFML/Graphics.hpp>
+	<string>
+
+1320067331 c:\users\yngve\smazk\particles.hpp
+
+1320336212 c:\users\yngve\smazk\projectile.hpp
 	"MovingEntity.hpp"
 
-1320096131 source:c:\users\yngve\smazk\player.cpp
-	"Player.hpp"
+1320334729 source:c:\users\yngve\smazk\projectile.cpp
+	<string>
+	"Projectile.hpp"
+
+1320336885 source:c:\users\yngve\smazk\stillobject.cpp
+	<string>
+	"StillObject.hpp"
+
+1320339681 source:c:\users\yngve\smazk\weapon.cpp
+	"Weapon.hpp"
+	"Projectile.hpp"
 

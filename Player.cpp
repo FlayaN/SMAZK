@@ -1,11 +1,22 @@
 #include "Player.hpp"
 
-int Player::getHealth()
+int Player::getHp()
 {
-    return health;
+    return hp;
 }
-void Player::setHealth(int health)
+void Player::setHp(int hp)
 {
-    this->health = health;
+    this->hp = hp;
 }
+
+Weapon& Player::getWeapon()
+{
+    return weapon;
+}
+
+void Player::updateTimers(float elapsedTime)
+{
+    weapon.updateTimers(elapsedTime);
+}
+
 
