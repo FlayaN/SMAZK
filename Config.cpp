@@ -27,9 +27,11 @@ std::vector<EnemyType> Config::getEnemys()
             enemy.particle = getString("particle","", section, path);
             enemy.decal = getString("decal","", section, path);
             enemy.weapon = getString("weapon","", section, path);
+            enemy.sound = getString("sound","", section, path);
 
             v.push_back(enemy);
             ss.str("");
+            ss.clear();
         }
     }
     catch(...)
@@ -63,6 +65,7 @@ std::vector<ProjectileType> Config::getProjectiles()
 
             v.push_back(projectile);
             ss.str("");
+            ss.clear();
         }
     }
     catch(...)
@@ -88,10 +91,11 @@ std::vector<WeaponType> Config::getWeapons()
             weapon.ammo = getInt("ammo", 1, section, path);
             weapon.model = getString("model", "", section, path);
             weapon.name = getString("name", "", section, path);
-            weapon.projectile = getString("name", "", section, path);
+            weapon.projectile = getString("projectile", "", section, path);
             weapon.scale = getFloat("scale", 1.0F, section, path);
             v.push_back(weapon);
             ss.str("");
+            ss.clear();
         }
     }
     catch(...)
@@ -124,6 +128,7 @@ std::vector<PowerUpType> Config::getPowerUps()
 
             v.push_back(powerup);
             ss.str("");
+            ss.clear();
         }
     }
     catch(...)
@@ -153,6 +158,7 @@ std::vector<DecalType> Config::getDecals()
 
             v.push_back(decal);
             ss.str("");
+            ss.clear();
         }
     }
     catch(...)
@@ -183,6 +189,7 @@ std::vector<ParticleType> Config::getParticles()
 
             v.push_back(particle);
             ss.str("");
+            ss.clear();
         }
     }
     catch(...)

@@ -184,7 +184,7 @@ class Game
             sf::Vector2f v = calcDistanceV(enemies[i].GetPosition(),player.GetPosition());
             if (v.x <= (player.GetSize().x+enemies[i].GetSize().x)/2 && v.y <= (player.GetSize().y+enemies[i].GetSize().y)/2) //if the distance in x and y are less than the size of player+enemie/2 cause both player and enemy has a size.
             {
-                if ( player.getHp() <= 0) std::cout << "You are now dead" << std::endl;
+                if ( player.getHp() <= 0) std::cout << "";
                 player.setHp(player.getHp()-1);
                 //std::cout << player.getHp() << std::endl;
             }
@@ -236,10 +236,11 @@ class Game
 
         srand((unsigned) time(0));
         std::cout << rand() << std::endl;
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 20; i++)
         {
             enemies.push_back(Enemy(storage.getEnemyType(0), storage.getImage("zombie")));
-            enemies[i].SetPosition((rand() % 800),(rand() % 600));
+            enemies.push_back(Enemy(storage.getEnemyType(1), storage.getImage("zombie")));
+            enemies[i].SetPosition((rand() % SCREEN_SIZE_WIDTH),(rand() % SCREEN_SIZE_HEIGHT));
             enemies[i].SetCenter(storage.getImage("zombie").GetWidth()/2,storage.getImage("zombie").GetHeight()/2);
         }
 

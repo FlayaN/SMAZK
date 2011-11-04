@@ -7,6 +7,8 @@ MovingEntity::MovingEntity(EnemyType enemytype, sf::Image& image)
 {
     //std::cout << dead << std::endl;
     this->SetImage(image);
+    this->SetScaleX(enemytype.scale);
+    this->SetScaleY(enemytype.scale);
 }
 
 MovingEntity::MovingEntity(ProjectileType projectiletype, sf::Image& image)
@@ -14,6 +16,8 @@ MovingEntity::MovingEntity(ProjectileType projectiletype, sf::Image& image)
 {
     //std::cout << dead << std::endl;
     this->SetImage(image);
+    this->SetScaleX(projectiletype.scale);
+    this->SetScaleY(projectiletype.scale);
 }
 
 float MovingEntity::getSpeed()

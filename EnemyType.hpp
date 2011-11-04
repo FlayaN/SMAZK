@@ -11,5 +11,6 @@ public:
     std::string projectile;
     std::string decal;
     std::string particle;
+    std::string sound;
 };
 #endif
