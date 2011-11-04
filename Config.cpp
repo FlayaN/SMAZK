@@ -21,7 +21,7 @@ std::vector<EnemyType> Config::getEnemys()
 
             enemy.name = getString("name", "", section, path);
             enemy.maxHp = getInt("maxhp",1, section, path);
-            enemy.model = getString("model","", section, path);
+            enemy.model = ("resources\\images\\" + getString("model","", section, path));
             enemy.speed = getFloat("speed",1.0F, section, path);
             enemy.scale = getFloat("scale",1.0F, section, path);
             enemy.particle = getString("particle","", section, path);
@@ -54,7 +54,7 @@ std::vector<ProjectileType> Config::getProjectiles()
             ss >> section;
 
             projectile.damage = getInt("damage", 1, section, path);
-            projectile.model = getString("model", "", section, path);
+            projectile.model = ("resources\\images\\" + getString("model", "", section, path));
             projectile.name = getString("name", "", section, path);
             projectile.scale = getFloat("scale", 1.0F, section, path);
             projectile.speed = getFloat("speed", 1.0F, section, path);
@@ -217,10 +217,14 @@ bool Config::getBool(char* key, bool defaultValue, char* category, char* fileNam
     return (strcmp(result, "True") == 0 || strcmp(result, "true") == 0) ? true : false;
 }
 
-char* Config::getString(char* key, const char* defaultValue, char* category, char* fileName)
+std::string Config::getString(char* key, const char* defaultValue, char* category, char* fileName)
 {
+    std::string temp;
+    std::stringstream ss;
     char* result = new char[255];
     memset(result, 0x00, 255);
     GetPrivateProfileString(category, key, defaultValue, result, 255, fileName);
-    return result;
+    ss << result;
+    ss >> temp;
+    return temp;
 }

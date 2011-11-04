@@ -2,11 +2,12 @@
 #include "Enemy.hpp"
 
 
-int Enemy::getHealth()
+int Enemy::getHp()
 {
-    return health;
+    return hp;
 }
-void Enemy::setHealth(int health)
+void Enemy::setHp(int hp)
 {
-    health = health;
+    this->hp = hp;
 }
+

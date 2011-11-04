@@ -3,52 +3,71 @@
 	<iostream>
 	<SFML/Graphics.hpp>
 
-1320325036 source:c:\users\yngve\smazk\main.cpp
+1320426053 source:c:\users\yngve\smazk\main.cpp
 	<iostream>
 	<SFML/Graphics.hpp>
 	"Game.cpp"
 
-1315572064 source:c:\users\yngve\smazk\config.cpp
+1320425222 source:c:\users\yngve\smazk\config.cpp
+	"Config.hpp"
+	<iostream>
+	<Windows.h>
+	<stdio.h>
+	<sstream>
 
 1315572064 source:c:\users\yngve\smazk\decals.cpp
 
-1320067331 source:c:\users\yngve\smazk\enemy.cpp
+1320418269 source:c:\users\yngve\smazk\enemy.cpp
 	<string>
 	"Enemy.hpp"
 
-1320336153 c:\users\yngve\smazk\enemy.hpp
+1320417624 c:\users\yngve\smazk\enemy.hpp
 	<string>
 	"MovingEntity.hpp"
+	"EnemyType.hpp"
 
-1320326141 c:\users\yngve\smazk\movingentity.hpp
-	<SFML/Graphics.hpp>
+1320425555 c:\users\yngve\smazk\movingentity.hpp
+	"EnemyType.hpp"
+	"ProjectileType.hpp"
+	"SFML/Graphics.hpp"
 	<string>
 
-1320339324 source:c:\users\yngve\smazk\game.cpp
+1320425611 source:c:\users\yngve\smazk\game.cpp
 	<vector>
 	<algorithm>
 	<iterator>
 	<SFML/Graphics.hpp>
 	"Enemy.hpp"
+	"EnemyType.hpp"
 	"Player.hpp"
 	"Weapon.hpp"
 	"Projectile.hpp"
+	"Config.hpp"
+	"Storage.hpp"
 	<cmath>
+	<cstdlib>
+	<ctime>
 	<iostream>
 
-1320079527 source:c:\users\yngve\smazk\movingentity.cpp
+1320425549 source:c:\users\yngve\smazk\movingentity.cpp
 	"MovingEntity.hpp"
+	<iostream>
 
-1320339796 c:\users\yngve\smazk\game.cpp
+1320426944 c:\users\yngve\smazk\game.cpp
 	<vector>
 	<algorithm>
 	<iterator>
 	<SFML/Graphics.hpp>
 	"Enemy.hpp"
+	"EnemyType.hpp"
 	"Player.hpp"
 	"Weapon.hpp"
 	"Projectile.hpp"
+	"Config.hpp"
+	"Storage.hpp"
 	<cmath>
+	<cstdlib>
+	<ctime>
 	<iostream>
 
 1320336281 c:\users\yngve\smazk\player.hpp
@@ -68,10 +87,10 @@
 
 1320067331 c:\users\yngve\smazk\particles.hpp
 
-1320336212 c:\users\yngve\smazk\projectile.hpp
+1320425672 c:\users\yngve\smazk\projectile.hpp
 	"MovingEntity.hpp"
 
-1320334729 source:c:\users\yngve\smazk\projectile.cpp
+1320425659 source:c:\users\yngve\smazk\projectile.cpp
 	<string>
 	"Projectile.hpp"
 
@@ -82,4 +101,53 @@
 1320339681 source:c:\users\yngve\smazk\weapon.cpp
 	"Weapon.hpp"
 	"Projectile.hpp"
+
+1320339869 c:\users\yngve\smazk\enemytype.hpp
+	"TemplateType.hpp"
+	<string>
+
+1320339869 c:\users\yngve\smazk\templatetype.hpp
+	"SFML/Graphics.hpp"
+	<string>
+
+1320414340 c:\users\yngve\smazk\config.hpp
+	"EnemyType.hpp"
+	"WeaponType.hpp"
+	"ProjectileType.hpp"
+	"PowerUpType.hpp"
+	"DecalType.hpp"
+	"ParticleType.hpp"
+	<vector>
+	<string>
+
+1320339869 c:\users\yngve\smazk\weapontype.hpp
+	"TemplateType.hpp"
+	<string>
+
+1320339869 c:\users\yngve\smazk\projectiletype.hpp
+	"TemplateType.hpp"
+	<string>
+
+1320339869 c:\users\yngve\smazk\poweruptype.hpp
+	"TemplateType.hpp"
+	<string>
+
+1320339869 c:\users\yngve\smazk\decaltype.hpp
+	"TemplateType.hpp"
+	<string>
+
+1320339869 c:\users\yngve\smazk\particletype.hpp
+	"TemplateType.hpp"
+	<string>
+
+1320425433 c:\users\yngve\smazk\storage.hpp
+	"EnemyType.hpp"
+	"ProjectileType.hpp"
+	"SFML/Graphics.hpp"
+	<string>
+	<map>
+
+1320425183 source:c:\users\yngve\smazk\storage.cpp
+	"Storage.hpp"
+	<iostream>
 

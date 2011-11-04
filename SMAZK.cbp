@@ -38,6 +38,7 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Config.cpp" />
 		<Unit filename="Config.hpp" />
 		<Unit filename="Decals.hpp" />
 		<Unit filename="Enemy.cpp" />
@@ -56,6 +57,9 @@
 		<Unit filename="Projectile.hpp" />
 		<Unit filename="StillObject.cpp" />
 		<Unit filename="StillObject.hpp" />
+		<Unit filename="Storage.cpp" />
+		<Unit filename="Storage.hpp" />
+		<Unit filename="TemplateType.hpp" />
 		<Unit filename="Weapon.cpp" />
 		<Unit filename="Weapon.hpp" />
 		<Unit filename="main.cpp" />

@@ -1,5 +1,21 @@
 #include "MovingEntity.hpp"
 
+#include <iostream>
+
+MovingEntity::MovingEntity(EnemyType enemytype, sf::Image& image)
+: speed(enemytype.speed), name(enemytype.name), dead(false)
+{
+    //std::cout << dead << std::endl;
+    this->SetImage(image);
+}
+
+MovingEntity::MovingEntity(ProjectileType projectiletype, sf::Image& image)
+: speed(projectiletype.speed), name(projectiletype.name), dead(false)
+{
+    //std::cout << dead << std::endl;
+    this->SetImage(image);
+}
+
 float MovingEntity::getSpeed()
 {
     return speed;
@@ -19,4 +35,20 @@ std::string MovingEntity::getName()
 void MovingEntity::setName(std::string name)
 {
     this->name = name;
+}
+
+bool MovingEntity::isDead()
+{
+    return dead;
+}
+
+bool movingEntity::isDead(MovingEntity me)
+{
+
+    return me.isDead();
+}
+
+void MovingEntity::setDead()
+{
+    dead = true;
 }

@@ -6,4 +6,3 @@ int Projectile::getDmg()
 {
     return dmg;
 }
-

@@ -5,6 +5,7 @@
 #include "DecalType.hpp"
 #include "ParticleType.hpp"
 #include <vector>
+#include <string>
 #ifndef CONFIGqqq
 #define CONFIGqqq
 class Config
@@ -19,6 +20,6 @@ public:
     int getInt(char* key, int defaultValue, char* category, char* fileName);
     float getFloat(char* key, float defaultValue, char* category, char* fileName);
     bool getBool(char* key, bool defaultValue, char* category, char* fileName);
-    char* getString(char* key, const char* defaultValue, char* category, char* fileName);
+    std::string getString(char* key, const char* defaultValue, char* category, char* fileName);
 };
 #endif

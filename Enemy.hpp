@@ -1,5 +1,6 @@
 #include <string>
 #include "MovingEntity.hpp"
+#include "EnemyType.hpp"
 
 #ifndef ENEMYqqq
 #define ENEMYqqq
@@ -7,15 +8,13 @@
 class Enemy : public MovingEntity
 {
 public:
+    Enemy(EnemyType enemytype, sf::Image& image)
+    : MovingEntity(enemytype, image), hp(enemytype.maxHp) {}
 
-    Enemy(float speed, int health=100, std::string name="zombie")
-    : MovingEntity(speed, name), health(health) {}
-
-    int getHealth();
-    void setHealth(int health);
+    int getHp();
+    void setHp(int hp);
 
 private:
-    int health;
+    int hp;
 };
-
 #endif
