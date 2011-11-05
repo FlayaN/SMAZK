@@ -40,7 +40,6 @@
 		</Compiler>
 		<Unit filename="Config.cpp" />
 		<Unit filename="Config.hpp" />
-		<Unit filename="Decal.cpp" />
 		<Unit filename="Decal.hpp" />
 		<Unit filename="Enemy.cpp" />
 		<Unit filename="Enemy.hpp" />
