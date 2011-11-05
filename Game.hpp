@@ -28,20 +28,23 @@ class Game
 public:
     Game(sf::RenderWindow& window);
 
+    void initStorage();
     void run();
     void draw();
     void updateGameState();
-    float calcAngle(sf::Vector2f p1, sf::Vector2f p2);
-    float calcDistance(sf::Vector2f p1,sf::Vector2f p2);
-    sf::Vector2f calcDistanceV(sf::Vector2f p1,sf::Vector2f p2);
     void moveEntities();
+    void attack();
     void collide();
     void updateTimers();
     void killObjects();
-    void attack();
+
     void generateParticle(sf::Vector2f pos, float rot, ParticleType pt);
     void generateDecal(Enemy& enemy, DecalType dt);
-    void initStorage();
+
+    float calcAngle(sf::Vector2f p1, sf::Vector2f p2);
+    float calcDistance(sf::Vector2f p1, sf::Vector2f p2);
+    sf::Vector2f calcDistanceV(sf::Vector2f p1, sf::Vector2f p2);
+
 private:
 
     std::vector<Enemy> enemies;

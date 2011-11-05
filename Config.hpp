@@ -4,6 +4,7 @@
 #include "PowerUpType.hpp"
 #include "DecalType.hpp"
 #include "ParticleType.hpp"
+#include "WaveType.hpp"
 #include <vector>
 #include <string>
 #ifndef CONFIGqqq
@@ -17,6 +18,7 @@ public:
     std::vector<PowerUpType> getPowerUps();
     std::vector<DecalType> getDecals();
     std::vector<ParticleType> getParticles();
+    std::vector<WaveType> getWaves();
     int getInt(char* key, int defaultValue, char* category, char* fileName);
     float getFloat(char* key, float defaultValue, char* category, char* fileName);
     bool getBool(char* key, bool defaultValue, char* category, char* fileName);

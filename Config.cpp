@@ -200,6 +200,51 @@ std::vector<ParticleType> Config::getParticles()
     return v;
 }
 
+std::vector<WaveType> Config::getWaves()
+{
+    std::vector<WaveType> v;
+    WaveType wave;
+    std::stringstream ss;
+    std::stringstream ss2;
+    char* path = "resources\\ini\\waves.ini";
+    std::cout << "Waves: " << getInt("number", 1, "init", path) << std::endl;
+    char section[32];
+    char section2[32];
+    try{
+        for(int i = 1; i <= getInt("number", 1, "init", path); i++)
+        {
+            ss << "Wave";
+            ss << i;
+            ss >> section;
+
+            wave.total = getInt("numberofenemys", 1, section, path);
+            wave.types = getInt("typesofenemys", 1, section, path);
+
+            for(int j = 1; j <= getInt("number", 1, section, path); ++j)
+            {
+                ss2 << "Enemy";
+                ss2 << j;
+                ss2 >> section2;
+
+                wave.enemys.push_back(getString(section2, "", section, path));
+                std::cout << "wave.enemys: " << wave.enemys.size() << std::endl;
+
+                ss2.str("");
+                ss2.clear();
+            }
+
+            v.push_back(wave);
+            ss.str("");
+            ss.clear();
+        }
+    }
+    catch(...)
+    {
+        std::cout << "error";
+    }
+    return v;
+}
+
 int Config::getInt(char* key, int defaultValue, char* category, char* fileName)
 {
     return GetPrivateProfileInt(category, key, defaultValue, fileName);

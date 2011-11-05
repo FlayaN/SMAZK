@@ -3,6 +3,7 @@
 #include "ParticleType.hpp"
 #include "WeaponType.hpp"
 #include "DecalType.hpp"
+#include "WaveType.hpp"
 #include "SFML/Graphics.hpp"
 #include <string>
 #include <map>
@@ -24,6 +25,9 @@ public:
     DecalType getDecalType(int index);
     void setDecalTypes(std::vector<DecalType> v);
 
+    WaveType getWaveType(int index);
+    void setWaveTypes(std::vector<WaveType> v);
+
     /*    PowerUpType getPowerUpType(int index)
     void addPowerUpType(std::vector<PowerUpType>)*/
 
@@ -36,6 +40,7 @@ private:
     std::vector<ParticleType> particles;
     std::vector<WeaponType> weapons;
     std::vector<DecalType> decals;
+    std::vector<WaveType> waves;
     /*std::vector<PowerUpType> powerups
     */
 

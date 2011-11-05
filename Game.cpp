@@ -21,6 +21,39 @@ Game::Game(sf::RenderWindow& window)
     initStorage();
 }
 
+void Game::initStorage()
+{
+    storage.setEnemyTypes(config.getEnemys());
+    storage.setProjectileTypes(config.getProjectiles());
+    storage.setParticleTypes(config.getParticles());
+    storage.setWeaponTypes(config.getWeapons());
+    storage.setDecalTypes(config.getDecals());
+    storage.setImages();
+
+    srand((unsigned) time(0));
+    for (int i = 0; i < 50; ++i)
+    {
+        enemies.push_back(Enemy(storage.getEnemyType(0), storage.getImage("zombie")));
+        enemies[i].SetPosition((rand() % SCREEN_SIZE_WIDTH),(rand() % SCREEN_SIZE_HEIGHT));
+        enemies[i].SetCenter(storage.getImage("zombie").GetWidth()/2,storage.getImage("zombie").GetHeight()/2);
+    }
+
+    for (int i = 50; i < 100; ++i)
+    {
+        enemies.push_back(Enemy(storage.getEnemyType(1), storage.getImage("zombie")));
+        enemies[i].SetPosition((rand() % SCREEN_SIZE_WIDTH),(rand() % SCREEN_SIZE_HEIGHT));
+        enemies[i].SetCenter(storage.getImage("zombie").GetWidth()/2,storage.getImage("zombie").GetHeight()/2);
+    }
+
+    player = Player(3.0f, 100,Weapon(storage.getWeaponType(0), storage.getImage("Pistol")));
+    player.SetImage(playerImg);
+    player.SetPosition(500.0f,300.0f);
+    player.SetCenter(playerImg.GetWidth()/2,playerImg.GetHeight()/2);
+
+    crosshair.SetImage(crosshairImg);
+    crosshair.SetCenter(crosshairImg.GetWidth()/2,crosshairImg.GetHeight()/2);
+}
+
 void Game::run()
 {
     while (window.IsOpened())
@@ -77,52 +110,36 @@ void Game::updateGameState()
     killObjects();
 }
 
-
-float Game::calcAngle(sf::Vector2f p1, sf::Vector2f p2)//float x1, float y1, float x2,float y2)
-{
-    return std::atan2((p2.x-p1.x),(p1.y-p2.y));
-}
-
-float Game::calcDistance(sf::Vector2f p1,sf::Vector2f p2)
-{
-    return std::sqrt(std::pow((p1.x-p2.x),2)+std::pow(p1.y-p2.y,2));
-}
-
-sf::Vector2f Game::calcDistanceV(sf::Vector2f p1,sf::Vector2f p2)
-{
-    return sf::Vector2f(std::abs(p1.x-p2.x),std::abs(p1.y-p2.y));
-}
-
 void Game::moveEntities()
 {
     //Moves Enemies
     for (unsigned int i = 0; i < enemies.size(); ++i)
     {
-            float speed = enemies[i].getSpeed();//*0.1;
-            float rotation = (calcAngle(player.GetPosition(),enemies[i].GetPosition()))+PI/2;
-            float dx = speed*std::cos(rotation);
-            float dy = speed*std::sin(rotation);
-            enemies[i].SetRotation((-rotation*180/PI)-90);
-            enemies[i].Move(dx,dy);
+        float speed = enemies[i].getSpeed();//*0.1;
+        float rotation = (calcAngle(player.GetPosition(),enemies[i].GetPosition()))+PI/2;
+        float dx = speed*std::cos(rotation);
+        float dy = speed*std::sin(rotation);
+        enemies[i].SetRotation((-rotation*180/PI)-90);
+        enemies[i].Move(dx,dy);
     }
     //Moves Projectiles
     for (unsigned int i = 0; i < projectiles.size(); ++i)
     {
-            float speed = projectiles[i].getSpeed();//*0.1;
-            float rotation = -(projectiles[i].GetRotation()/180*PI)+PI/2;
-            float dx = speed*std::cos(rotation);
-            float dy = speed*std::sin(rotation);
-            //projectiles[i].SetRotation((-rotation*180/PI)-90);
-            projectiles[i].Move(dx,dy);
+        float speed = projectiles[i].getSpeed();//*0.1;
+        float rotation = -(projectiles[i].GetRotation()/180*PI)+PI/2;
+        float dx = speed*std::cos(rotation);
+        float dy = speed*std::sin(rotation);
+        //projectiles[i].SetRotation((-rotation*180/PI)-90);
+        projectiles[i].Move(dx,dy);
     }
     for (unsigned int i = 0; i < particles.size(); ++i)
     {
-            float speed = particles[i].getSpeed();//*0.1;
-            float rotation = -(particles[i].GetRotation()/180*PI)+PI/2;
-            float dx = speed*std::cos(rotation);
-            float dy = speed*std::sin(rotation);
-            //projectiles[i].SetRotation((-rotation*180/PI)-90);
-            particles[i].Move(dx,dy);
+        float speed = particles[i].getSpeed();//*0.1;
+        float rotation = -(particles[i].GetRotation()/180*PI)+PI/2;
+        float dx = speed*std::cos(rotation);
+        float dy = speed*std::sin(rotation);
+        //projectiles[i].SetRotation((-rotation*180/PI)-90);
+        particles[i].Move(dx,dy);
     }
     //moves the player
     float dx = 0;
@@ -161,6 +178,17 @@ void Game::moveEntities()
 
 }
 
+void Game::attack()
+{
+    if(window.GetInput().IsMouseButtonDown(sf::Mouse::Left) && player.getWeapon().isAttackReady())
+    {
+        player.attack();
+        Projectile tmp_projectile = Projectile(storage.getProjectileType(0), storage.getImage("PBullet"));
+        tmp_projectile.SetPosition(player.GetPosition());
+        tmp_projectile.SetRotation(player.GetRotation());
+        projectiles.push_back(tmp_projectile);
+    }
+}
 
 void Game::collide()
 {
@@ -193,6 +221,7 @@ void Game::collide()
         }
     }
 }
+
 void Game::updateTimers()
 {
     player.updateTimers(elapsedTime);
@@ -215,18 +244,6 @@ void Game::killObjects()
     projectiles.erase(std::remove_if(projectiles.begin(),projectiles.end(),movingEntity::isDead),projectiles.end());
     enemies.erase(std::remove_if(enemies.begin(),enemies.end(),movingEntity::isDead),enemies.end());
     particles.erase(std::remove_if(particles.begin(),particles.end(),movingEntity::isDead),particles.end());
-}
-
-void Game::attack()
-{
-    if(window.GetInput().IsMouseButtonDown(sf::Mouse::Left) && player.getWeapon().isAttackReady())
-    {
-        player.attack();
-        Projectile tmp_projectile = Projectile(storage.getProjectileType(0), storage.getImage("PBullet"));
-        tmp_projectile.SetPosition(player.GetPosition());
-        tmp_projectile.SetRotation(player.GetRotation());
-        projectiles.push_back(tmp_projectile);
-    }
 }
 
 void Game::generateParticle(sf::Vector2f pos, float rot, ParticleType pt)
@@ -252,36 +269,17 @@ void Game::generateDecal(Enemy& enemy, DecalType dt)
     decals.push_back(tmp_decal);
 }
 
-void Game::initStorage()
+float Game::calcAngle(sf::Vector2f p1, sf::Vector2f p2)//float x1, float y1, float x2,float y2)
 {
+    return std::atan2((p2.x-p1.x),(p1.y-p2.y));
+}
 
-    storage.setEnemyTypes(config.getEnemys());
-    storage.setProjectileTypes(config.getProjectiles());
-    storage.setParticleTypes(config.getParticles());
-    storage.setWeaponTypes(config.getWeapons());
-    storage.setDecalTypes(config.getDecals());
-    storage.setImages();
+float Game::calcDistance(sf::Vector2f p1,sf::Vector2f p2)
+{
+    return std::sqrt(std::pow((p1.x-p2.x),2)+std::pow(p1.y-p2.y,2));
+}
 
-    srand((unsigned) time(0));
-    for (int i = 0; i < 50; ++i)
-    {
-        enemies.push_back(Enemy(storage.getEnemyType(0), storage.getImage("zombie")));
-        enemies[i].SetPosition((rand() % SCREEN_SIZE_WIDTH),(rand() % SCREEN_SIZE_HEIGHT));
-        enemies[i].SetCenter(storage.getImage("zombie").GetWidth()/2,storage.getImage("zombie").GetHeight()/2);
-    }
-
-    for (int i = 50; i < 100; ++i)
-    {
-        enemies.push_back(Enemy(storage.getEnemyType(1), storage.getImage("zombie")));
-        enemies[i].SetPosition((rand() % SCREEN_SIZE_WIDTH),(rand() % SCREEN_SIZE_HEIGHT));
-        enemies[i].SetCenter(storage.getImage("zombie").GetWidth()/2,storage.getImage("zombie").GetHeight()/2);
-    }
-
-    player = Player(3.0f, 100,Weapon(storage.getWeaponType(0), storage.getImage("Pistol")));
-    player.SetImage(playerImg);
-    player.SetPosition(500.0f,300.0f);
-    player.SetCenter(playerImg.GetWidth()/2,playerImg.GetHeight()/2);
-
-    crosshair.SetImage(crosshairImg);
-    crosshair.SetCenter(crosshairImg.GetWidth()/2,crosshairImg.GetHeight()/2);
+sf::Vector2f Game::calcDistanceV(sf::Vector2f p1,sf::Vector2f p2)
+{
+    return sf::Vector2f(std::abs(p1.x-p2.x),std::abs(p1.y-p2.y));
 }

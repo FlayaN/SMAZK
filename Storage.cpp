@@ -45,9 +45,20 @@ DecalType Storage::getDecalType(int index)
 {
     return decals[index];
 }
+
 void Storage::setDecalTypes(std::vector<DecalType> v)
 {
     decals = v;
+}
+
+WaveType Storage::getWaveType(int index)
+{
+    return waves[index];
+}
+
+void Storage::setWaveTypes(std::vector<WaveType> v)
+{
+    waves = v;
 }
 
 void Storage::setImages()

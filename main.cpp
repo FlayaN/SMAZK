@@ -1,6 +1,6 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "Game.cpp"
+#include "Game.hpp"
 #include <cstdlib>
 #include <ctime>
 
