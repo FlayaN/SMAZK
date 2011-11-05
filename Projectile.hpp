@@ -6,8 +6,8 @@
 class Projectile : public MovingEntity
 {
 public:
-    Projectile(ProjectileType projectiletype, sf::Image& image)
-    : MovingEntity(projectiletype, image), dmg(projectiletype.damage) {}
+    Projectile(ProjectileType projectiletype)
+    : MovingEntity(projectiletype), dmg(projectiletype.damage) {}
 
     int getDmg();
 

@@ -23,29 +23,32 @@ Game::Game(sf::RenderWindow& window)
 
 void Game::initStorage()
 {
+    Storage& storage = Storage::getInstance();
     storage.setEnemyTypes(config.getEnemys());
     storage.setProjectileTypes(config.getProjectiles());
     storage.setParticleTypes(config.getParticles());
     storage.setWeaponTypes(config.getWeapons());
     storage.setDecalTypes(config.getDecals());
+    storage.setPowerUpTypes(config.getPowerUps());
+    storage.setWaveTypes(config.getWaves());
     storage.setImages();
 
     srand((unsigned) time(0));
     for (int i = 0; i < 50; ++i)
     {
-        enemies.push_back(Enemy(storage.getEnemyType(0), storage.getImage("zombie")));
+        enemies.push_back(Enemy(storage.getEnemyType(0)));
         enemies[i].SetPosition((rand() % SCREEN_SIZE_WIDTH),(rand() % SCREEN_SIZE_HEIGHT));
-        enemies[i].SetCenter(storage.getImage("zombie").GetWidth()/2,storage.getImage("zombie").GetHeight()/2);
+        enemies[i].SetCenter(storage.getImage("zombie").GetWidth()/2, storage.getImage("zombie").GetHeight()/2);
     }
 
     for (int i = 50; i < 100; ++i)
     {
-        enemies.push_back(Enemy(storage.getEnemyType(1), storage.getImage("zombie")));
+        enemies.push_back(Enemy(storage.getEnemyType(1)));
         enemies[i].SetPosition((rand() % SCREEN_SIZE_WIDTH),(rand() % SCREEN_SIZE_HEIGHT));
-        enemies[i].SetCenter(storage.getImage("zombie").GetWidth()/2,storage.getImage("zombie").GetHeight()/2);
+        enemies[i].SetCenter(storage.getImage("zombie").GetWidth()/2, storage.getImage("zombie").GetHeight()/2);
     }
 
-    player = Player(3.0f, 100,Weapon(storage.getWeaponType(0), storage.getImage("Pistol")));
+    player = Player(3.0f, 100,Weapon(storage.getWeaponType(0)));
     player.SetImage(playerImg);
     player.SetPosition(500.0f,300.0f);
     player.SetCenter(playerImg.GetWidth()/2,playerImg.GetHeight()/2);
@@ -183,7 +186,7 @@ void Game::attack()
     if(window.GetInput().IsMouseButtonDown(sf::Mouse::Left) && player.getWeapon().isAttackReady())
     {
         player.attack();
-        Projectile tmp_projectile = Projectile(storage.getProjectileType(0), storage.getImage("PBullet"));
+        Projectile tmp_projectile = Projectile(Storage::getInstance().getProjectileType(0));
         tmp_projectile.SetPosition(player.GetPosition());
         tmp_projectile.SetRotation(player.GetRotation());
         projectiles.push_back(tmp_projectile);
@@ -210,12 +213,12 @@ void Game::collide()
             {
                 enemies[i].setHp(enemies[i].getHp()-projectiles[j].getDmg());
                 //std::cout << enemies[i].getHp() << std::endl;
-                generateParticle(projectiles[j].GetPosition(),projectiles[j].GetRotation(), storage.getParticleType(0));
+                generateParticle(projectiles[j].GetPosition(),projectiles[j].GetRotation(), Storage::getInstance().getParticleType(0));
                 projectiles[j].setDead();
                 if(enemies[i].getHp() <= 0)
                 {
                     enemies[i].setDead();
-                    generateDecal(enemies[i], storage.getDecalType(1));
+                    generateDecal(enemies[i], Storage::getInstance().getDecalType(1));
                 }
             }
         }
@@ -251,7 +254,7 @@ void Game::generateParticle(sf::Vector2f pos, float rot, ParticleType pt)
     int random = rand() % 20;
     for (int i = 0; i < random; ++i)
     {
-        Particle tmp_particle = Particle(pt, storage.getImage(pt.name), (rand() % 500)/100 + 2);
+        Particle tmp_particle = Particle(pt, (rand() % 500)/100 + 2);
         tmp_particle.SetPosition(pos);
         tmp_particle.SetRotation(rot-10+(rand() % 1000)/300);
         particles.push_back(tmp_particle);
@@ -261,7 +264,7 @@ void Game::generateParticle(sf::Vector2f pos, float rot, ParticleType pt)
 
 void Game::generateDecal(Enemy& enemy, DecalType dt)
 {
-    Decal tmp_decal = Decal(dt, storage.getImage(dt.name));
+    Decal tmp_decal = Decal(dt);
     tmp_decal.SetPosition(enemy.GetPosition());
     tmp_decal.SetCenter(tmp_decal.GetSize().x/2, tmp_decal.GetSize().y/2);
     tmp_decal.SetScale(enemy.GetScale());

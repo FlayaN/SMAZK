@@ -169,7 +169,7 @@
 	"Storage.hpp"
 	<iostream>
 
-1320524382 source:c:\users\hannes\smazk\config.cpp
+1320527380 source:c:\users\hannes\smazk\config.cpp
 	"Config.hpp"
 	<iostream>
 	<Windows.h>
@@ -215,56 +215,60 @@
 	"TemplateType.hpp"
 	<string>
 
-1320517648 source:c:\users\hannes\smazk\enemy.cpp
+1320530282 source:c:\users\hannes\smazk\enemy.cpp
 	<string>
 	"Enemy.hpp"
 
-1320517648 c:\users\hannes\smazk\enemy.hpp
+1320531189 c:\users\hannes\smazk\enemy.hpp
 	<string>
 	"MovingEntity.hpp"
 	"EnemyType.hpp"
 
-1320517648 c:\users\hannes\smazk\movingentity.hpp
+1320531191 c:\users\hannes\smazk\movingentity.hpp
 	"EnemyType.hpp"
 	"ProjectileType.hpp"
 	"ParticleType.hpp"
 	"SFML/Graphics.hpp"
+	"Storage.hpp"
 	<string>
 
-1320524944 source:c:\users\hannes\smazk\game.cpp
+1320531136 source:c:\users\hannes\smazk\game.cpp
 	"Game.hpp"
 
 1320517648 c:\users\hannes\smazk\player.hpp
 	"MovingEntity.hpp"
 	"Weapon.hpp"
 
-1320517648 c:\users\hannes\smazk\weapon.hpp
+1320531004 c:\users\hannes\smazk\weapon.hpp
 	<string>
 	"StillObject.hpp"
 	"WeaponType.hpp"
 
-1320517648 c:\users\hannes\smazk\stillobject.hpp
-	<SFML/Graphics.hpp>
+1320531218 c:\users\hannes\smazk\stillobject.hpp
+	"SFML/Graphics.hpp"
 	"DecalType.hpp"
 	"WeaponType.hpp"
+	"Storage.hpp"
 	<string>
 
-1320517648 c:\users\hannes\smazk\projectile.hpp
+1320530985 c:\users\hannes\smazk\projectile.hpp
 	"MovingEntity.hpp"
 
-1320525084 c:\users\hannes\smazk\storage.hpp
+1320530527 c:\users\hannes\smazk\storage.hpp
 	"EnemyType.hpp"
 	"ProjectileType.hpp"
 	"ParticleType.hpp"
 	"WeaponType.hpp"
 	"DecalType.hpp"
 	"WaveType.hpp"
+	"PowerUpType.hpp"
 	"SFML/Graphics.hpp"
 	<string>
 	<map>
 
-1320517648 source:c:\users\hannes\smazk\movingentity.cpp
+1320530852 source:c:\users\hannes\smazk\movingentity.cpp
 	"MovingEntity.hpp"
+	"Storage.hpp"
 	<iostream>
 
 1320517648 source:c:\users\hannes\smazk\player.cpp
@@ -278,7 +282,7 @@
 	<string>
 	"StillObject.hpp"
 
-1320517648 source:c:\users\hannes\smazk\storage.cpp
+1320529913 source:c:\users\hannes\smazk\storage.cpp
 	"Storage.hpp"
 	<iostream>
 
@@ -314,22 +318,22 @@
 
 1320513780 source:c:\users\yngve\smazk\decal.cpp
 
-1320517648 c:\users\hannes\smazk\particle.hpp
+1320530972 c:\users\hannes\smazk\particle.hpp
 	"MovingEntity.hpp"
 	"ParticleType.hpp"
 	"SFML/Graphics.hpp"
 
-1320517648 c:\users\hannes\smazk\decal.hpp
+1320531013 c:\users\hannes\smazk\decal.hpp
 	<string>
 	"StillObject.hpp"
 	"DecalType.hpp"
 
-1320517648 source:c:\users\hannes\smazk\particle.cpp
+1320531150 source:c:\users\hannes\smazk\particle.cpp
 	<string>
 	"Particle.hpp"
 	<iostream>
 
-1320524615 c:\users\hannes\smazk\game.hpp
+1320527564 c:\users\hannes\smazk\game.hpp
 	<vector>
 	<algorithm>
 	<iterator>
@@ -352,4 +356,6 @@
 
 1320524782 c:\users\hannes\smazk\wavetype.hpp
 	<string>
+
+1320525724 source:c:\users\hannes\smazk\powerup.cpp
 

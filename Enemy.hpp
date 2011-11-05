@@ -8,8 +8,8 @@
 class Enemy : public MovingEntity
 {
 public:
-    Enemy(EnemyType enemytype, sf::Image& image)
-    : MovingEntity(enemytype, image), hp(enemytype.maxHp) {}
+    Enemy(EnemyType enemytype)
+    : MovingEntity(enemytype), hp(enemytype.maxHp){}
 
     int getHp();
     void setHp(int hp);

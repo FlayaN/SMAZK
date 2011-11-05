@@ -53,7 +53,7 @@ private:
     std::vector<Particle> particles;
     std::vector<Decal> decals;
     Player player;
-    Storage storage;
+    //Storage storage;
 
     sf::Clock clock;
     float elapsedTime, gameTime;

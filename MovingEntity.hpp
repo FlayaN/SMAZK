@@ -2,6 +2,7 @@
 #include "ProjectileType.hpp"
 #include "ParticleType.hpp"
 #include "SFML/Graphics.hpp"
+#include "Storage.hpp"
 #include <string>
 
 #ifndef MOVEINGENTITYdef
@@ -12,11 +13,11 @@ class MovingEntity : public sf::Sprite
 public:
     MovingEntity(float speed = 2.0f) : speed(speed), dead(false) {}
 
-    MovingEntity(ProjectileType projectiletype, sf::Image& image);
+    MovingEntity(ProjectileType projectiletype);
 
-    MovingEntity(EnemyType enemytype, sf::Image& image);
+    MovingEntity(EnemyType enemytype);
 
-    MovingEntity(ParticleType particletype, sf::Image& image, float speed);
+    MovingEntity(ParticleType particletype, float speed);
 
     float getSpeed();
     void setSpeed(float speed);

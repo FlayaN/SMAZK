@@ -125,7 +125,7 @@ std::vector<PowerUpType> Config::getPowerUps()
             powerup.heal = getInt("heal", 1, section, path);
             powerup.scale = getFloat("scale", 1.0F, section, path);
             powerup.name = getString("name", "", section, path);
-            powerup.model = getString("model", "", section, path);
+            powerup.model = ("resources\\images\\" + getString("model", "", section, path));
 
             v.push_back(powerup);
             ss.str("");

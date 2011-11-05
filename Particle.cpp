@@ -2,8 +2,8 @@
 #include "Particle.hpp"
 #include <iostream>
 
-Particle::Particle(ParticleType particletype, sf::Image& image, float speed = 1.0f)
-    : MovingEntity(particletype, image, speed)
+Particle::Particle(ParticleType particletype, float speed = 1.0f)
+    : MovingEntity(particletype, speed)
 {
     sf::Randomizer random;
     random.SetSeed(5);

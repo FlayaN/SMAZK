@@ -10,8 +10,8 @@ class Decal : public StillObject
 public:
     Decal(){}
 
-    Decal(DecalType decaltype, sf::Image& image)
-    : StillObject(decaltype, image) {}
+    Decal(DecalType decaltype)
+    : StillObject(decaltype) {}
 
 private:
 

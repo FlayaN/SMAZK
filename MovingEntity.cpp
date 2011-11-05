@@ -1,30 +1,29 @@
 #include "MovingEntity.hpp"
+#include "Storage.hpp"
 
 #include <iostream>
 
-MovingEntity::MovingEntity(EnemyType enemytype, sf::Image& image)
+MovingEntity::MovingEntity(EnemyType enemytype)
 : speed(enemytype.speed), name(enemytype.name), dead(false)
 {
-    //std::cout << dead << std::endl;
-    this->SetImage(image);
+    this->SetImage(Storage::getInstance().getImage(enemytype.name));
     this->SetScaleX(enemytype.scale);
     this->SetScaleY(enemytype.scale);
 }
 
-MovingEntity::MovingEntity(ProjectileType projectiletype, sf::Image& image)
+MovingEntity::MovingEntity(ProjectileType projectiletype)
 : speed(projectiletype.speed), name(projectiletype.name), dead(false)
 {
-    //std::cout << dead << std::endl;
-    this->SetImage(image);
+    this->SetImage(Storage::getInstance().getImage(projectiletype.name));
     this->SetScaleX(projectiletype.scale);
     this->SetScaleY(projectiletype.scale);
 }
 
-MovingEntity::MovingEntity(ParticleType particletype, sf::Image& image, float speed = 1.0f)
+MovingEntity::MovingEntity(ParticleType particletype, float speed = 1.0f)
 : speed(speed), name(particletype.name), dead(false)
 {
     //std::cout << dead << std::endl;
-    this->SetImage(image);
+    this->SetImage(Storage::getInstance().getImage(particletype.name));
     this->SetScaleX(particletype.scale);
     this->SetScaleY(particletype.scale);
 }

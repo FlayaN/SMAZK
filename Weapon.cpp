@@ -8,8 +8,8 @@ Weapon::Weapon(float attackSpeed, std::string name, std::string projectile)
 {
     attackCooldown = 0;
 }
-Weapon::Weapon(WeaponType weapontype, sf::Image& image)
-    : StillObject(weapontype, image), attackSpeed(weapontype.speed), ammo(weapontype.ammo), projectile(weapontype.projectile)
+Weapon::Weapon(WeaponType weapontype)
+    : StillObject(weapontype), attackSpeed(weapontype.speed), ammo(weapontype.ammo), projectile(weapontype.projectile)
 {
     attackCooldown = 0;
 }
