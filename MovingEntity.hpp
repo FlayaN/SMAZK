@@ -1,5 +1,6 @@
 #include "EnemyType.hpp"
 #include "ProjectileType.hpp"
+#include "ParticleType.hpp"
 #include "SFML/Graphics.hpp"
 #include <string>
 
@@ -9,11 +10,13 @@
 class MovingEntity : public sf::Sprite
 {
 public:
-    MovingEntity(float speed = 2.0f) : speed(speed){}
+    MovingEntity(float speed = 2.0f) : speed(speed), dead(false) {}
 
     MovingEntity(ProjectileType projectiletype, sf::Image& image);
 
     MovingEntity(EnemyType enemytype, sf::Image& image);
+
+    MovingEntity(ParticleType particletype, sf::Image& image, float speed);
 
     float getSpeed();
     void setSpeed(float speed);

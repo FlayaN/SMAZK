@@ -1,6 +1,8 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Game.cpp"
+#include <cstdlib>
+#include <ctime>
 
 //Defines constants
 #define SCREEN_SIZE_WIDTH   1280
@@ -18,3 +20,4 @@ int main()
 
     return EXIT_SUCCESS;
 }
+

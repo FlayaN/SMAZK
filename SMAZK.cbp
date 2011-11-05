@@ -40,7 +40,8 @@
 		</Compiler>
 		<Unit filename="Config.cpp" />
 		<Unit filename="Config.hpp" />
-		<Unit filename="Decals.hpp" />
+		<Unit filename="Decal.cpp" />
+		<Unit filename="Decal.hpp" />
 		<Unit filename="Enemy.cpp" />
 		<Unit filename="Enemy.hpp" />
 		<Unit filename="EnemyType.hpp" />
@@ -49,7 +50,9 @@
 		<Unit filename="Gui.hpp" />
 		<Unit filename="MovingEntity.cpp" />
 		<Unit filename="MovingEntity.hpp" />
-		<Unit filename="Particles.hpp" />
+		<Unit filename="Particle.cpp" />
+		<Unit filename="Particle.hpp" />
+		<Unit filename="ParticleType.hpp" />
 		<Unit filename="Player.cpp" />
 		<Unit filename="Player.hpp" />
 		<Unit filename="PowerUps.hpp" />
@@ -62,6 +65,7 @@
 		<Unit filename="TemplateType.hpp" />
 		<Unit filename="Weapon.cpp" />
 		<Unit filename="Weapon.hpp" />
+		<Unit filename="WeaponType.hpp" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

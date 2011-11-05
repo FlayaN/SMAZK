@@ -19,4 +19,7 @@ void Player::updateTimers(float elapsedTime)
     weapon.updateTimers(elapsedTime);
 }
 
-
+void Player::attack()
+{
+    weapon.attack();
+}

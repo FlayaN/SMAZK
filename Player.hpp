@@ -9,7 +9,7 @@ class Player : public MovingEntity
 public:
     Player(){}
 
-    Player(float speed, int hp, Weapon weapon): MovingEntity(speed), hp(hp) {}
+    Player(float speed, int hp, Weapon weapon): weapon(weapon), MovingEntity(speed), hp(hp) {}
 
     int getHp();
 
@@ -17,6 +17,8 @@ public:
 
     void updateTimers(float elapsedTime);
     Weapon& getWeapon();
+
+    void attack();
 
 private:
 

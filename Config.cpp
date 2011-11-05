@@ -85,14 +85,15 @@ std::vector<WeaponType> Config::getWeapons()
     try{
         for(int count = 1; count <= getInt("number", 1, "init", path); count++)
         {
-            ss << "Enemy";
+            ss << "Weapon";
             ss << count;
             ss >> section;
             weapon.ammo = getInt("ammo", 1, section, path);
-            weapon.model = getString("model", "", section, path);
+            weapon.model = ("resources\\images\\" + getString("model", "", section, path));
             weapon.name = getString("name", "", section, path);
             weapon.projectile = getString("projectile", "", section, path);
             weapon.scale = getFloat("scale", 1.0F, section, path);
+            weapon.speed = getFloat("speed", 1.0F, section, path);
             v.push_back(weapon);
             ss.str("");
             ss.clear();
@@ -154,7 +155,7 @@ std::vector<DecalType> Config::getDecals()
 
             decal.scale = getFloat("scale", 1.0F, section, path);
             decal.name = getString("name", "", section, path);
-            decal.model = getString("model", "", section, path);
+            decal.model = ("resources\\images\\" + getString("model", "", section, path));
 
             v.push_back(decal);
             ss.str("");
@@ -184,7 +185,7 @@ std::vector<ParticleType> Config::getParticles()
 
             particle.scale = getFloat("scale", 1.0F, section, path);
             particle.name = getString("name", "", section, path);
-            particle.model = getString("model", "", section, path);
+            particle.model = ("resources\\images\\" + getString("model", "", section, path));
             particle.duration = getFloat("duration", 1.0F, section, path);
 
             v.push_back(particle);

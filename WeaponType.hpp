@@ -7,5 +7,6 @@ class WeaponType : public TemplateType
 public:
     int ammo;
     std::string projectile;
+    float speed;
 };
 #endif

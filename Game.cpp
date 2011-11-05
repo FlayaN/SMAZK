@@ -2,13 +2,19 @@
 #include <algorithm>
 #include <iterator>
 #include <SFML/Graphics.hpp>
-#include "Enemy.hpp"
+
 #include "EnemyType.hpp"
+#include "Projectile.hpp"
+#include "ParticleType.hpp"
+#include "DecalType.hpp"
+#include "Enemy.hpp"
 #include "Player.hpp"
 #include "Weapon.hpp"
-#include "Projectile.hpp"
 #include "Config.hpp"
 #include "Storage.hpp"
+#include "Particle.hpp"
+#include "Decal.hpp"
+
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
@@ -27,11 +33,15 @@ class Game
     std::vector<Enemy> enemies;
     std::vector<Projectile> projectiles;
     std::vector<Weapon> weapons;
+    std::vector<Particle> particles;
+    std::vector<Decal> decals;
     Player player;
     Storage storage;
 
     sf::Clock clock;
-    double elapseTime;
+    float elapsedTime;
+    float gameTime;
+
     sf::RenderWindow& window;
     sf::Event event;
     sf::Sprite crosshair;
@@ -52,6 +62,7 @@ class Game
         bgImg.LoadFromFile("resources\\images\\floor.png");
         bg.SetImage(bgImg);
         window.ShowMouseCursor(false);
+        gameTime=0;
         initStorage();
     }
 
@@ -76,15 +87,21 @@ class Game
         window.Clear();
         //for_each(enemies.begin(),enemies.end(),window.Draw);
         window.Draw(bg);
+        for (unsigned int i = 0; i < decals.size(); ++i)
+        {
+            window.Draw(decals[i]);
+        }
         for (unsigned int i = 0; i < enemies.size(); ++i)
         {
-            if(!enemies[i].isDead())
-                window.Draw(enemies[i]);
+            window.Draw(enemies[i]);
         }
         for (unsigned int i = 0; i < projectiles.size(); ++i)
         {
-            if(!projectiles[i].isDead())
-                window.Draw(projectiles[i]);
+            window.Draw(projectiles[i]);
+        }
+        for (unsigned int i = 0; i < particles.size(); ++i)
+        {
+            window.Draw(particles[i]);
         }
         window.Draw(player);
         window.Draw(crosshair);
@@ -94,12 +111,14 @@ class Game
 
     void updateGameState()
     {
-        elapseTime=clock.GetElapsedTime();
+        elapsedTime=clock.GetElapsedTime();
+        gameTime += elapsedTime;
         clock.Reset();
 
         moveEntities();
         attack();
         collide();
+        updateTimers();
         killObjects();
     }
 
@@ -141,22 +160,34 @@ class Game
                 //projectiles[i].SetRotation((-rotation*180/PI)-90);
                 projectiles[i].Move(dx,dy);
         }
+        for (unsigned int i = 0; i < particles.size(); ++i)
+        {
+                float speed = particles[i].getSpeed();//*0.1;
+                float rotation = -(particles[i].GetRotation()/180*PI)+PI/2;
+                float dx = speed*std::cos(rotation);
+                float dy = speed*std::sin(rotation);
+                //projectiles[i].SetRotation((-rotation*180/PI)-90);
+                particles[i].Move(dx,dy);
+        }
         //moves the player
         float dx = 0;
         float dy = 0;
-        if(window.GetInput().IsKeyDown(sf::Key::Up) || window.GetInput().IsKeyDown(sf::Key::W))
+        float bordercollisionX = player.GetSize().x * sqrt2inv;
+        float bordercollisionY = player.GetSize().y * sqrt2inv;
+
+        if((window.GetInput().IsKeyDown(sf::Key::Up) || window.GetInput().IsKeyDown(sf::Key::W) ) && player.GetPosition().y - bordercollisionY > 0)
         {
             --dy;
         }
-        if(window.GetInput().IsKeyDown(sf::Key::Down) || window.GetInput().IsKeyDown(sf::Key::S))
+        if((window.GetInput().IsKeyDown(sf::Key::Down) || window.GetInput().IsKeyDown(sf::Key::S) ) && player.GetPosition().y + bordercollisionY < SCREEN_SIZE_HEIGHT)
         {
             ++dy;
         }
-        if(window.GetInput().IsKeyDown(sf::Key::Left) || window.GetInput().IsKeyDown(sf::Key::A))
+        if((window.GetInput().IsKeyDown(sf::Key::Left) || window.GetInput().IsKeyDown(sf::Key::A) ) && player.GetPosition().x - bordercollisionX > 0)
         {
             --dx;
         }
-        if(window.GetInput().IsKeyDown(sf::Key::Right) || window.GetInput().IsKeyDown(sf::Key::D))
+        if((window.GetInput().IsKeyDown(sf::Key::Right) || window.GetInput().IsKeyDown(sf::Key::D) ) && player.GetPosition().x + bordercollisionX < SCREEN_SIZE_WIDTH)
         {
             ++dx;
         }
@@ -193,13 +224,27 @@ class Game
                 v = calcDistanceV(enemies[i].GetPosition(),projectiles[j].GetPosition());
                 if(v.x <= (projectiles[j].GetSize().x+enemies[i].GetSize().x)/2 && v.y <= (projectiles[j].GetSize().y+enemies[i].GetSize().y)/2)
                 {
-                    enemies[i].setHp(enemies[i].getHp()-1);
+                    enemies[i].setHp(enemies[i].getHp()-projectiles[j].getDmg());
                     //std::cout << enemies[i].getHp() << std::endl;
+                    generateParticle(projectiles[j].GetPosition(),projectiles[j].GetRotation(), storage.getParticleType(0));
                     projectiles[j].setDead();
-                    if(enemies[i].getHp() <= 0) enemies[i].setDead();
+                    if(enemies[i].getHp() <= 0)
+                    {
+                        enemies[i].setDead();
+                        generateDecal(enemies[i], storage.getDecalType(1));
+                    }
                 }
             }
         }
+    }
+    void updateTimers()
+    {
+        player.updateTimers(elapsedTime);
+        for(unsigned int i = 0; i < particles.size(); ++i)
+        {
+            particles[i].updateTimers(elapsedTime);
+        }
+
     }
 
     void killObjects()
@@ -213,38 +258,70 @@ class Game
         }
         projectiles.erase(std::remove_if(projectiles.begin(),projectiles.end(),movingEntity::isDead),projectiles.end());
         enemies.erase(std::remove_if(enemies.begin(),enemies.end(),movingEntity::isDead),enemies.end());
+        particles.erase(std::remove_if(particles.begin(),particles.end(),movingEntity::isDead),particles.end());
     }
 
     void attack()
     {
-        if(window.GetInput().IsMouseButtonDown(sf::Mouse::Left))// && player.getWeapon().isAttackReady())
+        if(window.GetInput().IsMouseButtonDown(sf::Mouse::Left) && player.getWeapon().isAttackReady())
         {
+            player.attack();
             Projectile tmp_projectile = Projectile(storage.getProjectileType(0), storage.getImage("PBullet"));
             tmp_projectile.SetPosition(player.GetPosition());
             tmp_projectile.SetRotation(player.GetRotation());
             projectiles.push_back(tmp_projectile);
         }
     }
-    //void killObjekt() {}
-    //Storage& initStorage(Storage&) {}
+
+    void generateParticle(sf::Vector2f pos, float rot, ParticleType pt)
+    {
+        int random = rand() % 20;
+        for (int i = 0; i < random; ++i)
+        {
+            Particle tmp_particle = Particle(pt, storage.getImage(pt.name), (rand() % 500)/100 + 2);
+            tmp_particle.SetPosition(pos);
+            tmp_particle.SetRotation(rot-10+(rand() % 1000)/300n);
+            particles.push_back(tmp_particle);
+        }
+
+    }
+
+    void generateDecal(Enemy& enemy, DecalType dt)
+    {
+        Decal tmp_decal = Decal(dt, storage.getImage(dt.name));
+        tmp_decal.SetPosition(enemy.GetPosition());
+        tmp_decal.SetCenter(tmp_decal.GetSize().x/2, tmp_decal.GetSize().y/2);
+        tmp_decal.SetScale(enemy.GetScale());
+        tmp_decal.SetRotation(enemy.GetRotation());
+        decals.push_back(tmp_decal);
+    }
+
     void initStorage()
     {
 
         storage.setEnemyTypes(config.getEnemys());
         storage.setProjectileTypes(config.getProjectiles());
+        storage.setParticleTypes(config.getParticles());
+        storage.setWeaponTypes(config.getWeapons());
+        storage.setDecalTypes(config.getDecals());
         storage.setImages();
 
         srand((unsigned) time(0));
-        std::cout << rand() << std::endl;
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 50; ++i)
         {
             enemies.push_back(Enemy(storage.getEnemyType(0), storage.getImage("zombie")));
+            enemies[i].SetPosition((rand() % SCREEN_SIZE_WIDTH),(rand() % SCREEN_SIZE_HEIGHT));
+            enemies[i].SetCenter(storage.getImage("zombie").GetWidth()/2,storage.getImage("zombie").GetHeight()/2);
+        }
+
+        for (int i = 50; i < 100; ++i)
+        {
             enemies.push_back(Enemy(storage.getEnemyType(1), storage.getImage("zombie")));
             enemies[i].SetPosition((rand() % SCREEN_SIZE_WIDTH),(rand() % SCREEN_SIZE_HEIGHT));
             enemies[i].SetCenter(storage.getImage("zombie").GetWidth()/2,storage.getImage("zombie").GetHeight()/2);
         }
 
-        player = Player(3.0f, 100,Weapon(3,"Pistol","PBullet"));
+        player = Player(3.0f, 100,Weapon(storage.getWeaponType(0), storage.getImage("Pistol")));
         player.SetImage(playerImg);
         player.SetPosition(500.0f,300.0f);
         player.SetCenter(playerImg.GetWidth()/2,playerImg.GetHeight()/2);

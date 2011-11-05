@@ -20,6 +20,15 @@ MovingEntity::MovingEntity(ProjectileType projectiletype, sf::Image& image)
     this->SetScaleY(projectiletype.scale);
 }
 
+MovingEntity::MovingEntity(ParticleType particletype, sf::Image& image, float speed = 1.0f)
+: speed(speed), name(particletype.name), dead(false)
+{
+    //std::cout << dead << std::endl;
+    this->SetImage(image);
+    this->SetScaleX(particletype.scale);
+    this->SetScaleY(particletype.scale);
+}
+
 float MovingEntity::getSpeed()
 {
     return speed;
@@ -46,13 +55,13 @@ bool MovingEntity::isDead()
     return dead;
 }
 
+void MovingEntity::setDead()
+{
+    dead = true;
+}
+
 bool movingEntity::isDead(MovingEntity me)
 {
 
     return me.isDead();
-}
-
-void MovingEntity::setDead()
-{
-    dead = true;
 }
