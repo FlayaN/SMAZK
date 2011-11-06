@@ -11,10 +11,10 @@
 Game::Game(sf::RenderWindow& window)
     : window(window)
 {
-    playerImg.LoadFromFile("resources\\images\\Anders.png");
+    playerImg.LoadFromFile("resources\\images\\player.png");
     crosshairImg.LoadFromFile("resources\\images\\crosshair.png");
-    PBulletImg.LoadFromFile("resources\\images\\PBullet.png");
     bgImg.LoadFromFile("resources\\images\\floor.png");
+    font.LoadFromFile("resources\\zombie.ttf");
     bg.SetImage(bgImg);
     window.ShowMouseCursor(false);
     gameTime=0;
@@ -56,6 +56,10 @@ void Game::initStorage()
 
     crosshair.SetImage(crosshairImg);
     crosshair.SetCenter(crosshairImg.GetWidth()/2,crosshairImg.GetHeight()/2);
+
+    text.SetFont(font);
+    text.SetSize(50);
+    text.SetColor(sf::Color(255, 0, 0, 255));
 }
 
 void Game::run()
@@ -96,6 +100,7 @@ void Game::draw()
     }
     window.Draw(player);
     window.Draw(crosshair);
+    window.Draw(text);
 
     window.Display();
 }
@@ -105,6 +110,7 @@ void Game::updateGameState()
     elapsedTime=clock.GetElapsedTime();
     gameTime += elapsedTime;
     clock.Reset();
+    text.SetText("Enemys " + int2Str(enemies.size()));
 
     moveEntities();
     attack();
@@ -284,4 +290,11 @@ float Game::calcDistance(sf::Vector2f p1,sf::Vector2f p2)
 sf::Vector2f Game::calcDistanceV(sf::Vector2f p1,sf::Vector2f p2)
 {
     return sf::Vector2f(std::abs(p1.x-p2.x),std::abs(p1.y-p2.y));
+}
+
+std::string Game::int2Str(int x)
+{
+  std::stringstream type;
+  type << x;
+  return type.str();
 }

@@ -20,6 +20,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
+#include <sstream>
 
 #ifndef GAMEqqq
 #define GAMEqqq
@@ -45,6 +46,7 @@ public:
     float calcAngle(sf::Vector2f p1, sf::Vector2f p2);
     float calcDistance(sf::Vector2f p1, sf::Vector2f p2);
     sf::Vector2f calcDistanceV(sf::Vector2f p1, sf::Vector2f p2);
+    std::string int2Str(int x);
 
 private:
 
@@ -57,6 +59,8 @@ private:
     //Storage storage;
 
     sf::Clock clock;
+    sf::Font font;
+    sf::String text;
     float elapsedTime, gameTime;
 
     sf::RenderWindow& window;
