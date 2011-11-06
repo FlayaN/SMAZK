@@ -9,6 +9,7 @@ MovingEntity::MovingEntity(EnemyType enemytype)
     this->SetImage(Storage::getInstance().getImage(enemytype.name));
     this->SetScaleX(enemytype.scale);
     this->SetScaleY(enemytype.scale);
+    this->SetCenter(Storage::getInstance().getImage(enemytype.name).GetWidth()/2, Storage::getInstance().getImage(enemytype.name).GetHeight()/2);
 }
 
 MovingEntity::MovingEntity(ProjectileType projectiletype)
@@ -17,6 +18,7 @@ MovingEntity::MovingEntity(ProjectileType projectiletype)
     this->SetImage(Storage::getInstance().getImage(projectiletype.name));
     this->SetScaleX(projectiletype.scale);
     this->SetScaleY(projectiletype.scale);
+    this->SetCenter(Storage::getInstance().getImage(projectiletype.name).GetWidth()/2, Storage::getInstance().getImage(projectiletype.name).GetHeight()/2);
 }
 
 MovingEntity::MovingEntity(ParticleType particletype, float speed = 1.0f)
@@ -26,6 +28,7 @@ MovingEntity::MovingEntity(ParticleType particletype, float speed = 1.0f)
     this->SetImage(Storage::getInstance().getImage(particletype.name));
     this->SetScaleX(particletype.scale);
     this->SetScaleY(particletype.scale);
+    this->SetCenter(Storage::getInstance().getImage(particletype.name).GetWidth()/2, Storage::getInstance().getImage(particletype.name).GetHeight()/2);
 }
 
 float MovingEntity::getSpeed()

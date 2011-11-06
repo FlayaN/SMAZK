@@ -38,15 +38,16 @@ void Game::initStorage()
     {
         enemies.push_back(Enemy(storage.getEnemyType(0)));
         enemies[i].SetPosition((rand() % SCREEN_SIZE_WIDTH),(rand() % SCREEN_SIZE_HEIGHT));
-        enemies[i].SetCenter(storage.getImage("zombie").GetWidth()/2, storage.getImage("zombie").GetHeight()/2);
     }
 
     for (int i = 50; i < 100; ++i)
     {
         enemies.push_back(Enemy(storage.getEnemyType(1)));
         enemies[i].SetPosition((rand() % SCREEN_SIZE_WIDTH),(rand() % SCREEN_SIZE_HEIGHT));
-        enemies[i].SetCenter(storage.getImage("zombie").GetWidth()/2, storage.getImage("zombie").GetHeight()/2);
     }
+    enemies.push_back(Enemy(storage.getEnemyType(2)));
+    enemies[100].SetPosition((rand() % SCREEN_SIZE_WIDTH),(rand() % SCREEN_SIZE_HEIGHT));
+
 
     player = Player(3.0f, 100,Weapon(storage.getWeaponType(0)));
     player.SetImage(playerImg);
@@ -68,7 +69,6 @@ void Game::run()
                 window.Close();
         }
         updateGameState();
-
     }
 }
 //void playSounds() {}
@@ -266,7 +266,6 @@ void Game::generateDecal(Enemy& enemy, DecalType dt)
 {
     Decal tmp_decal = Decal(dt);
     tmp_decal.SetPosition(enemy.GetPosition());
-    tmp_decal.SetCenter(tmp_decal.GetSize().x/2, tmp_decal.GetSize().y/2);
     tmp_decal.SetScale(enemy.GetScale());
     tmp_decal.SetRotation(enemy.GetRotation());
     decals.push_back(tmp_decal);

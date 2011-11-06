@@ -7,10 +7,6 @@ class EnemyType: public TemplateType
 public:
     int maxHp;
     float speed;
-    std::string weapon;
-    std::string projectile;
-    std::string decal;
-    std::string particle;
-    std::string sound;
+    std::string weapon, projectile, decal, particle, sound, dmg;
 };
 #endif

@@ -28,6 +28,7 @@ std::vector<EnemyType> Config::getEnemys()
             enemy.decal = getString("decal","", section, path);
             enemy.weapon = getString("weapon","", section, path);
             enemy.sound = getString("sound","", section, path);
+            enemy.dmg = getInt("damage", 1, section, path);
 
             v.push_back(enemy);
             ss.str("");
@@ -227,7 +228,6 @@ std::vector<WaveType> Config::getWaves()
                 ss2 >> section2;
 
                 wave.enemys.push_back(getString(section2, "", section, path));
-                std::cout << "wave.enemys: " << wave.enemys.size() << std::endl;
 
                 ss2.str("");
                 ss2.clear();

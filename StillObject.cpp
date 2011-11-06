@@ -8,6 +8,7 @@ StillObject::StillObject(DecalType decaltype)
     this->SetImage(Storage::getInstance().getImage(decaltype.name));
     this->SetScaleX(decaltype.scale);
     this->SetScaleY(decaltype.scale);
+    this->SetCenter(Storage::getInstance().getImage(decaltype.name).GetWidth()/2, Storage::getInstance().getImage(decaltype.name).GetHeight()/2);
 }
 
 StillObject::StillObject(WeaponType weapontype)
@@ -17,6 +18,7 @@ StillObject::StillObject(WeaponType weapontype)
     this->SetImage(Storage::getInstance().getImage(weapontype.name));
     this->SetScaleX(weapontype.scale);
     this->SetScaleY(weapontype.scale);
+    this->SetCenter(Storage::getInstance().getImage(weapontype.name).GetWidth()/2, Storage::getInstance().getImage(weapontype.name).GetHeight()/2);
 }
 
 std::string StillObject::getName()

@@ -7,6 +7,7 @@
 #include "Projectile.hpp"
 #include "ParticleType.hpp"
 #include "DecalType.hpp"
+#include "WaveType.hpp"
 #include "Enemy.hpp"
 #include "Player.hpp"
 #include "Weapon.hpp"
