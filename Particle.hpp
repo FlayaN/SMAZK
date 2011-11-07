@@ -7,7 +7,7 @@
 class Particle : public MovingEntity
 {
 public:
-    Particle(ParticleType particletype, float speed);
+    Particle(ParticleType particletype, sf::Vector2f pos, float rot, float speed);
 
     int getDuration();
 

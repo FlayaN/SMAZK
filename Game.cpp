@@ -36,26 +36,28 @@ void Game::initStorage()
     srand((unsigned) time(0));
     for (int i = 0; i < 50; ++i)
     {
-        enemies.push_back(Enemy(storage.getEnemyType(0)));
-        enemies[i].SetPosition((rand() % SCREEN_SIZE_WIDTH),(rand() % SCREEN_SIZE_HEIGHT));
+        enemies.push_back(Enemy(storage.getEnemyType(0), sf::Vector2f((rand() % SCREEN_SIZE_WIDTH),(rand() % SCREEN_SIZE_HEIGHT))));
     }
 
     for (int i = 50; i < 100; ++i)
     {
-        enemies.push_back(Enemy(storage.getEnemyType(1)));
-        enemies[i].SetPosition((rand() % SCREEN_SIZE_WIDTH),(rand() % SCREEN_SIZE_HEIGHT));
+        enemies.push_back(Enemy(storage.getEnemyType(1), sf::Vector2f((rand() % SCREEN_SIZE_WIDTH),(rand() % SCREEN_SIZE_HEIGHT))));
     }
-    enemies.push_back(Enemy(storage.getEnemyType(2)));
-    enemies[100].SetPosition((rand() % SCREEN_SIZE_WIDTH),(rand() % SCREEN_SIZE_HEIGHT));
+    enemies.push_back(Enemy(storage.getEnemyType(2), sf::Vector2f((rand() % SCREEN_SIZE_WIDTH),(rand() % SCREEN_SIZE_HEIGHT))));
 
 
-    player = Player(3.0f, 100,Weapon(storage.getWeaponType(0)));
+    player = Player(3.0f, 100,Weapon(storage.getWeaponType(0), sf::Vector2f(player.GetPosition()), player.GetRotation()));
     player.SetImage(playerImg);
     player.SetPosition(500.0f,300.0f);
     player.SetCenter(playerImg.GetWidth()/2,playerImg.GetHeight()/2);
 
     crosshair.SetImage(crosshairImg);
     crosshair.SetCenter(crosshairImg.GetWidth()/2,crosshairImg.GetHeight()/2);
+
+    PowerUp tmp_powerup(storage.getPowerUpType(0), sf::Vector2f(200, 400), 0);
+    PowerUp tmp_powerup2(storage.getPowerUpType(1), sf::Vector2f(400, 400), 0);
+    powerups.push_back(tmp_powerup);
+    powerups.push_back(tmp_powerup2);
 
     text.SetFont(font);
     text.SetSize(50);
@@ -98,6 +100,10 @@ void Game::draw()
     {
         window.Draw(particles[i]);
     }
+    for (unsigned int i = 0; i < powerups.size(); ++i)
+    {
+        window.Draw(powerups[i]);
+    }
     window.Draw(player);
     window.Draw(crosshair);
     window.Draw(text);
@@ -110,13 +116,23 @@ void Game::updateGameState()
     elapsedTime=clock.GetElapsedTime();
     gameTime += elapsedTime;
     clock.Reset();
-    text.SetText("Enemys " + int2Str(enemies.size()));
+    //text.SetText("Enemys " + Utility::int2Str(enemies.size()));
+    text.SetText("Player Hp  " + Utility::int2Str(player.getHp()));
 
+    spawn();
     moveEntities();
     attack();
     collide();
     updateTimers();
     killObjects();
+}
+
+void Game::spawn()
+{
+    /*if(enemies.size == 0)
+    {
+
+    }*/
 }
 
 void Game::moveEntities()
@@ -125,7 +141,7 @@ void Game::moveEntities()
     for (unsigned int i = 0; i < enemies.size(); ++i)
     {
         float speed = enemies[i].getSpeed();//*0.1;
-        float rotation = (calcAngle(player.GetPosition(),enemies[i].GetPosition()))+PI/2;
+        float rotation = (Utility::calcAngle(player.GetPosition(),enemies[i].GetPosition()))+PI/2;
         float dx = speed*std::cos(rotation);
         float dy = speed*std::sin(rotation);
         enemies[i].SetRotation((-rotation*180/PI)-90);
@@ -182,7 +198,7 @@ void Game::moveEntities()
     // Rotate the player to the crosshair
     player.Move(dx*player.getSpeed(),dy*player.getSpeed());;
     //sf::Vector2f mouse(window.GetInput().GetMouseX(),window.GetInput().GetMouseY());
-    float rotation = (calcAngle(player.GetPosition(),sf::Vector2f(window.GetInput().GetMouseX(),window.GetInput().GetMouseY())))+PI/2;
+    float rotation = (Utility::calcAngle(player.GetPosition(),sf::Vector2f(window.GetInput().GetMouseX(),window.GetInput().GetMouseY())))+PI/2;
     player.SetRotation((-rotation*180/PI)-90);
 
 }
@@ -192,9 +208,8 @@ void Game::attack()
     if(window.GetInput().IsMouseButtonDown(sf::Mouse::Left) && player.getWeapon().isAttackReady())
     {
         player.attack();
-        Projectile tmp_projectile = Projectile(Storage::getInstance().getProjectileType(0));
-        tmp_projectile.SetPosition(player.GetPosition());
-        tmp_projectile.SetRotation(player.GetRotation());
+        Projectile tmp_projectile = Projectile(Storage::getInstance().getProjectileType(0), sf::Vector2f(player.GetPosition()), player.GetRotation());
+        generateShellParticle(tmp_projectile.GetPosition(),tmp_projectile.GetRotation(), Storage::getInstance().getParticleType(2));
         projectiles.push_back(tmp_projectile);
     }
 }
@@ -205,7 +220,7 @@ void Game::collide()
     //Enemies - Player
     for (unsigned int i = 0; i < enemies.size(); ++i)
     {
-        sf::Vector2f v = calcDistanceV(enemies[i].GetPosition(),player.GetPosition());
+        sf::Vector2f v = Utility::calcDistanceV(enemies[i].GetPosition(),player.GetPosition());
         if (v.x <= (player.GetSize().x+enemies[i].GetSize().x)/2 && v.y <= (player.GetSize().y+enemies[i].GetSize().y)/2) //if the distance in x and y are less than the size of player+enemie/2 cause both player and enemy has a size.
         {
             if ( player.getHp() <= 0) std::cout << "";
@@ -214,12 +229,12 @@ void Game::collide()
         }
         for(unsigned int j = 0; j < projectiles.size(); ++j)
         {
-            v = calcDistanceV(enemies[i].GetPosition(),projectiles[j].GetPosition());
+            v = Utility::calcDistanceV(enemies[i].GetPosition(),projectiles[j].GetPosition());
             if(v.x <= (projectiles[j].GetSize().x+enemies[i].GetSize().x)/2 && v.y <= (projectiles[j].GetSize().y+enemies[i].GetSize().y)/2)
             {
                 enemies[i].setHp(enemies[i].getHp()-projectiles[j].getDmg());
                 //std::cout << enemies[i].getHp() << std::endl;
-                generateParticle(projectiles[j].GetPosition(),projectiles[j].GetRotation(), Storage::getInstance().getParticleType(0));
+                generateBloodParticle(projectiles[j].GetPosition(),projectiles[j].GetRotation(), Storage::getInstance().getParticleType(0));
                 projectiles[j].setDead();
                 if(enemies[i].getHp() <= 0)
                 {
@@ -227,6 +242,16 @@ void Game::collide()
                     generateDecal(enemies[i], Storage::getInstance().getDecalType(1));
                 }
             }
+        }
+    }
+    for(unsigned int i = 0; i < powerups.size(); ++i)
+    {
+        sf::Vector2f v = Utility::calcDistanceV(powerups[i].GetPosition(),player.GetPosition());
+        if (v.x <= (player.GetSize().x+powerups[i].GetSize().x)/2 && v.y <= (player.GetSize().y+powerups[i].GetSize().y)/2)
+        {
+            player.setHp(player.getHp() + powerups[i].getHeal());
+            player.setSpeed(player.getSpeed() * powerups[i].getSpeedScale());
+            powerups[i].setDead();
         }
     }
 }
@@ -253,48 +278,29 @@ void Game::killObjects()
     projectiles.erase(std::remove_if(projectiles.begin(),projectiles.end(),movingEntity::isDead),projectiles.end());
     enemies.erase(std::remove_if(enemies.begin(),enemies.end(),movingEntity::isDead),enemies.end());
     particles.erase(std::remove_if(particles.begin(),particles.end(),movingEntity::isDead),particles.end());
+    powerups.erase(std::remove_if(powerups.begin(),powerups.end(),stillObject::isDead),powerups.end());
 }
 
-void Game::generateParticle(sf::Vector2f pos, float rot, ParticleType pt)
+void Game::generateBloodParticle(sf::Vector2f pos, float rot, ParticleType pt)
 {
-    int random = rand() % 20;
+    float random = Storage::getInstance().getRandom(10, 20);
     for (int i = 0; i < random; ++i)
     {
-        Particle tmp_particle = Particle(pt, (rand() % 500)/100 + 2);
-        tmp_particle.SetPosition(pos);
-        tmp_particle.SetRotation(rot-10+(rand() % 1000)/300);
+        Particle tmp_particle = Particle(pt, pos, rot+Storage::getInstance().getRandom(-20, 20), Storage::getInstance().getRandom(2, 4));
         particles.push_back(tmp_particle);
     }
 
 }
 
+void Game::generateShellParticle(sf::Vector2f pos, float rot, ParticleType pt)
+{
+    Particle tmp_particle = Particle(pt, pos, rot+90, Storage::getInstance().getRandom(2, 4));
+    particles.push_back(tmp_particle);
+}
+
+
 void Game::generateDecal(Enemy& enemy, DecalType dt)
 {
-    Decal tmp_decal = Decal(dt);
-    tmp_decal.SetPosition(enemy.GetPosition());
-    tmp_decal.SetScale(enemy.GetScale());
-    tmp_decal.SetRotation(enemy.GetRotation());
+    Decal tmp_decal = Decal(dt, enemy.GetPosition(), enemy.GetRotation());
     decals.push_back(tmp_decal);
-}
-
-float Game::calcAngle(sf::Vector2f p1, sf::Vector2f p2)//float x1, float y1, float x2,float y2)
-{
-    return std::atan2((p2.x-p1.x),(p1.y-p2.y));
-}
-
-float Game::calcDistance(sf::Vector2f p1,sf::Vector2f p2)
-{
-    return std::sqrt(std::pow((p1.x-p2.x),2)+std::pow(p1.y-p2.y,2));
-}
-
-sf::Vector2f Game::calcDistanceV(sf::Vector2f p1,sf::Vector2f p2)
-{
-    return sf::Vector2f(std::abs(p1.x-p2.x),std::abs(p1.y-p2.y));
-}
-
-std::string Game::int2Str(int x)
-{
-  std::stringstream type;
-  type << x;
-  return type.str();
 }

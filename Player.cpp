@@ -23,3 +23,9 @@ void Player::attack()
 {
     weapon.attack();
 }
+
+
+void setPowerUp()
+{
+
+}

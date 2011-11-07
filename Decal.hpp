@@ -10,8 +10,8 @@ class Decal : public StillObject
 public:
     Decal(){}
 
-    Decal(DecalType decaltype)
-    : StillObject(decaltype) {}
+    Decal(DecalType decaltype, sf::Vector2f pos, float rot)
+    : StillObject(decaltype, pos, rot) {}
 
 private:
 

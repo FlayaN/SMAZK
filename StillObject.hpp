@@ -1,6 +1,8 @@
 #include "SFML/Graphics.hpp"
 #include "DecalType.hpp"
 #include "WeaponType.hpp"
+#include "PowerUpType.hpp"
+
 #include "Storage.hpp"
 
 #include <string>
@@ -13,9 +15,11 @@ class StillObject : public sf::Sprite
 public:
     StillObject(std::string name = "noname") : name(name) {}
 
-    StillObject(DecalType decaltype);
+    StillObject(DecalType decaltype, sf::Vector2f pos, float rot);
 
-    StillObject(WeaponType weapontype);
+    StillObject(WeaponType weapontype, sf::Vector2f pos, float rot);
+
+    StillObject(PowerUpType poweruptype, sf::Vector2f pos, float rot);
 
     std::string getName();
     void setName(std::string name);

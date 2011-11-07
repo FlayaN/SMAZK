@@ -6,8 +6,10 @@
 #include "WaveType.hpp"
 #include "PowerUpType.hpp"
 #include "SFML/Graphics.hpp"
+
 #include <string>
 #include <map>
+#include <ctime>
 
 #ifndef STORAGEqqq
 #define STORAGEqqq
@@ -41,8 +43,10 @@ public:
     void setImages();
     sf::Image& getImage(std::string name);
 
+    float getRandom(float begin, float end);
+
 private:
-    Storage(){}
+    Storage();
 
     Storage(Storage const& copy);
     Storage& operator=(Storage const& copy);
@@ -56,5 +60,7 @@ private:
     std::vector<PowerUpType> powerups;
 
     std::map<std::string, sf::Image> imagemap;
+
+    sf::Randomizer random;
 };
 #endif

@@ -15,6 +15,8 @@
 #include "Storage.hpp"
 #include "Particle.hpp"
 #include "Decal.hpp"
+#include "Utility.hpp"
+#include "PowerUp.hpp"
 
 #include <cmath>
 #include <cstdlib>
@@ -34,19 +36,16 @@ public:
     void run();
     void draw();
     void updateGameState();
+    void spawn();
     void moveEntities();
     void attack();
     void collide();
     void updateTimers();
     void killObjects();
 
-    void generateParticle(sf::Vector2f pos, float rot, ParticleType pt);
+    void generateBloodParticle(sf::Vector2f pos, float rot, ParticleType pt);
+    void generateShellParticle(sf::Vector2f pos, float rot, ParticleType pt);
     void generateDecal(Enemy& enemy, DecalType dt);
-
-    float calcAngle(sf::Vector2f p1, sf::Vector2f p2);
-    float calcDistance(sf::Vector2f p1, sf::Vector2f p2);
-    sf::Vector2f calcDistanceV(sf::Vector2f p1, sf::Vector2f p2);
-    std::string int2Str(int x);
 
 private:
 
@@ -55,6 +54,7 @@ private:
     std::vector<Weapon> weapons;
     std::vector<Particle> particles;
     std::vector<Decal> decals;
+    std::vector<PowerUp> powerups;
     Player player;
     //Storage storage;
 

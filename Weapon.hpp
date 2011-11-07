@@ -12,7 +12,7 @@ public:
 
     Weapon(float attackSpeed, std::string name, std::string projectile);
 
-    Weapon(WeaponType weapontype);
+    Weapon(WeaponType weapontype, sf::Vector2f pos, float rot);
 
     void updateTimers(float elapsedTime);
     bool isAttackReady();

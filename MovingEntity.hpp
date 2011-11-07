@@ -13,11 +13,11 @@ class MovingEntity : public sf::Sprite
 public:
     MovingEntity(float speed = 2.0f) : speed(speed), dead(false) {}
 
-    MovingEntity(ProjectileType projectiletype);
+    MovingEntity(EnemyType enemytype, sf::Vector2f);
 
-    MovingEntity(EnemyType enemytype);
+    MovingEntity(ProjectileType projectiletype, sf::Vector2f pos, float rot);
 
-    MovingEntity(ParticleType particletype, float speed);
+    MovingEntity(ParticleType particletype, sf::Vector2f pos, float rot, float speed);
 
     float getSpeed();
     void setSpeed(float speed);

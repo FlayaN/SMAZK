@@ -20,8 +20,10 @@ public:
 
     void attack();
 
-private:
+    //void setPowerUp(PowerUp powerup);
 
+private:
+    //PowerUp powerup;
     Weapon weapon;
     int hp;
 };

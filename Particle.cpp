@@ -2,15 +2,10 @@
 #include "Particle.hpp"
 #include <iostream>
 
-Particle::Particle(ParticleType particletype, float speed = 1.0f)
-    : MovingEntity(particletype, speed)
+Particle::Particle(ParticleType particletype, sf::Vector2f pos, float rot, float speed = 1.0f)
+    : MovingEntity(particletype, pos, rot, speed)
 {
-    sf::Randomizer random;
-    random.SetSeed(5);
-    duration = particletype.duration;// * (random.Random(particletype.duration-particletype.duration/2, particletype.duration+particletype.duration/2));
-
-    //std::cout << particletype.duration << " : " << duration << std::endl;
-
+    duration = particletype.duration * (Storage::getInstance().getRandom(0.5f,1.5f));
 }
 
 int Particle::getDuration()
@@ -21,5 +16,8 @@ int Particle::getDuration()
 void Particle::updateTimers(float elapsedTime)
 {
     duration -= elapsedTime;
-    if (duration < 0) setDead();
+    if (duration < 0)
+    {
+        setDead();
+    }
 }

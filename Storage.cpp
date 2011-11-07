@@ -1,6 +1,11 @@
 #include "Storage.hpp"
 #include <iostream>
 
+Storage::Storage()
+{
+    random.SetSeed(time(0));
+}
+
 Storage::Storage& Storage::getInstance()
 {
     static Storage instance;
@@ -124,4 +129,9 @@ void Storage::setImages()
 sf::Image& Storage::getImage(std::string name)
 {
     return (*imagemap.find(name)).second;
+}
+
+float Storage::getRandom(float begin, float end)
+{
+    return random.Random(begin, end);
 }
