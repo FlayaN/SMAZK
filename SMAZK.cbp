@@ -56,14 +56,16 @@
 		<Unit filename="Player.hpp" />
 		<Unit filename="PowerUp.cpp" />
 		<Unit filename="PowerUp.hpp" />
-		<Unit filename="PowerUps.hpp" />
 		<Unit filename="Projectile.cpp" />
 		<Unit filename="Projectile.hpp" />
+		<Unit filename="ProjectileType.hpp" />
 		<Unit filename="StillObject.cpp" />
 		<Unit filename="StillObject.hpp" />
 		<Unit filename="Storage.cpp" />
 		<Unit filename="Storage.hpp" />
 		<Unit filename="TemplateType.hpp" />
+		<Unit filename="Utility.cpp" />
+		<Unit filename="Utility.hpp" />
 		<Unit filename="WaveType.hpp" />
 		<Unit filename="Weapon.cpp" />
 		<Unit filename="Weapon.hpp" />

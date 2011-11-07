@@ -10,7 +10,7 @@
 	<cstdlib>
 	<ctime>
 
-1320599430 source:c:\users\yngve\smazk\config.cpp
+1320688953 source:c:\users\yngve\smazk\config.cpp
 	"Config.hpp"
 	<iostream>
 	<Windows.h>
@@ -36,7 +36,7 @@
 	"Storage.hpp"
 	<string>
 
-1320675074 source:c:\users\yngve\smazk\game.cpp
+1320689015 source:c:\users\yngve\smazk\game.cpp
 	"Game.hpp"
 
 1320668473 source:c:\users\yngve\smazk\movingentity.cpp
@@ -65,11 +65,12 @@
 	<ctime>
 	<iostream>
 
-1320677176 c:\users\yngve\smazk\player.hpp
+1320678917 c:\users\yngve\smazk\player.hpp
 	"MovingEntity.hpp"
+	"powerUp.hpp"
 	"Weapon.hpp"
 
-1320599430 source:c:\users\yngve\smazk\player.cpp
+1320682356 source:c:\users\yngve\smazk\player.cpp
 	"Player.hpp"
 
 1320669500 c:\users\yngve\smazk\weapon.hpp
@@ -122,7 +123,7 @@
 	<vector>
 	<string>
 
-1320599430 c:\users\yngve\smazk\weapontype.hpp
+1320680354 c:\users\yngve\smazk\weapontype.hpp
 	"TemplateType.hpp"
 	<string>
 
@@ -142,7 +143,7 @@
 	"TemplateType.hpp"
 	<string>
 
-1320665984 c:\users\yngve\smazk\storage.hpp
+1320682965 c:\users\yngve\smazk\storage.hpp
 	"EnemyType.hpp"
 	"ProjectileType.hpp"
 	"ParticleType.hpp"
@@ -155,7 +156,7 @@
 	<map>
 	<ctime>
 
-1320666003 source:c:\users\yngve\smazk\storage.cpp
+1320687315 source:c:\users\yngve\smazk\storage.cpp
 	"Storage.hpp"
 	<iostream>
 
@@ -354,7 +355,7 @@
 1320599430 c:\users\yngve\smazk\wavetype.hpp
 	<string>
 
-1320674889 c:\users\yngve\smazk\game.hpp
+1320683922 c:\users\yngve\smazk\game.hpp
 	<vector>
 	<algorithm>
 	<iterator>
@@ -379,7 +380,7 @@
 	<iostream>
 	<sstream>
 
-1320671254 source:c:\users\yngve\smazk\powerup.cpp
+1320682001 source:c:\users\yngve\smazk\powerup.cpp
 	"PowerUp.hpp"
 
 1320665455 c:\users\yngve\smazk\utility.hpp
@@ -391,7 +392,7 @@
 1320665274 source:c:\users\yngve\smazk\utility.cpp
 	"Utility.hpp"
 
-1320671175 c:\users\yngve\smazk\powerup.hpp
+1320682116 c:\users\yngve\smazk\powerup.hpp
 	<string>
 	"StillObject.hpp"
 	"PowerUpType.hpp"

@@ -18,6 +18,7 @@ Game::Game(sf::RenderWindow& window)
     bg.SetImage(bgImg);
     window.ShowMouseCursor(false);
     gameTime=0;
+    currWave=-1;
     initStorage();
 }
 
@@ -33,8 +34,10 @@ void Game::initStorage()
     storage.setWaveTypes(config.getWaves());
     storage.setImages();
 
-    srand((unsigned) time(0));
-    for (int i = 0; i < 50; ++i)
+    waves = config.getInt("number", 1, "init", "resources\\ini\\waves.ini");
+
+    //srand((unsigned) time(0));
+    /*for (int i = 0; i < 50; ++i)
     {
         enemies.push_back(Enemy(storage.getEnemyType(0), sf::Vector2f((rand() % SCREEN_SIZE_WIDTH),(rand() % SCREEN_SIZE_HEIGHT))));
     }
@@ -44,7 +47,7 @@ void Game::initStorage()
         enemies.push_back(Enemy(storage.getEnemyType(1), sf::Vector2f((rand() % SCREEN_SIZE_WIDTH),(rand() % SCREEN_SIZE_HEIGHT))));
     }
     enemies.push_back(Enemy(storage.getEnemyType(2), sf::Vector2f((rand() % SCREEN_SIZE_WIDTH),(rand() % SCREEN_SIZE_HEIGHT))));
-
+*/
 
     player = Player(3.0f, 100,Weapon(storage.getWeaponType(0), sf::Vector2f(player.GetPosition()), player.GetRotation()));
     player.SetImage(playerImg);
@@ -117,7 +120,7 @@ void Game::updateGameState()
     gameTime += elapsedTime;
     clock.Reset();
     //text.SetText("Enemys " + Utility::int2Str(enemies.size()));
-    text.SetText("Player Hp  " + Utility::int2Str(player.getHp()));
+    text.SetText("Wave " + Utility::int2Str(currWave+1) + " enemys " + Utility::int2Str(enemies.size()) + " playerhp " + Utility::int2Str(player.getHp()));
 
     spawn();
     moveEntities();
@@ -129,10 +132,37 @@ void Game::updateGameState()
 
 void Game::spawn()
 {
-    /*if(enemies.size == 0)
+    if(enemies.size() == 0 && currWave + 1 < waves)
     {
+        ++currWave;
+        WaveType tmp_wave = Storage::getInstance().getWaveType(currWave);
+        int enemyTypesPerWave = tmp_wave.total/tmp_wave.types;
+        for (int i = 0; i < tmp_wave.types; ++i)
+        {
+            for(int j = 0; j < enemyTypesPerWave; ++j)
+            {
+                sf::Vector2f pos;
 
-    }*/
+                int randInt = Storage::getInstance().getRandom(0,3);
+                switch(randInt)
+                {
+                case 0:
+                    pos = sf::Vector2f(Storage::getInstance().getRandom(-100, 0), Storage::getInstance().getRandom(0, SCREEN_SIZE_HEIGHT));
+                    break;
+                case 1:
+                    pos = sf::Vector2f(Storage::getInstance().getRandom(SCREEN_SIZE_WIDTH, SCREEN_SIZE_WIDTH+100), Storage::getInstance().getRandom(0, SCREEN_SIZE_HEIGHT));
+                    break;
+                case 2:
+                    pos = sf::Vector2f(Storage::getInstance().getRandom(0, SCREEN_SIZE_WIDTH), Storage::getInstance().getRandom(-100,0));
+                    break;
+                default:
+                    pos = sf::Vector2f(Storage::getInstance().getRandom(0, SCREEN_SIZE_WIDTH),Storage::getInstance().getRandom(SCREEN_SIZE_HEIGHT,SCREEN_SIZE_HEIGHT+100));
+                    break;
+                }
+                enemies.push_back(Enemy(Storage::getInstance().getEnemyType(tmp_wave.enemys[i]), pos));
+            }
+        }
+    }
 }
 
 void Game::moveEntities()
@@ -250,7 +280,9 @@ void Game::collide()
         if (v.x <= (player.GetSize().x+powerups[i].GetSize().x)/2 && v.y <= (player.GetSize().y+powerups[i].GetSize().y)/2)
         {
             player.setHp(player.getHp() + powerups[i].getHeal());
-            player.setSpeed(player.getSpeed() * powerups[i].getSpeedScale());
+
+            player.setPowerUp(powerups[i]);
+            //player.setSpeed(player.getSpeed() * powerups[i].getSpeedScale());
             powerups[i].setDead();
         }
     }
@@ -302,5 +334,6 @@ void Game::generateShellParticle(sf::Vector2f pos, float rot, ParticleType pt)
 void Game::generateDecal(Enemy& enemy, DecalType dt)
 {
     Decal tmp_decal = Decal(dt, enemy.GetPosition(), enemy.GetRotation());
+    tmp_decal.SetScale(enemy.GetScale());
     decals.push_back(tmp_decal);
 }

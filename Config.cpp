@@ -204,7 +204,6 @@ std::vector<ParticleType> Config::getParticles()
 std::vector<WaveType> Config::getWaves()
 {
     std::vector<WaveType> v;
-    WaveType wave;
     std::stringstream ss;
     std::stringstream ss2;
     char* path = "resources\\ini\\waves.ini";
@@ -214,6 +213,7 @@ std::vector<WaveType> Config::getWaves()
     try{
         for(int i = 1; i <= getInt("number", 1, "init", path); i++)
         {
+            WaveType wave;
             ss << "Wave";
             ss << i;
             ss >> section;
@@ -221,7 +221,7 @@ std::vector<WaveType> Config::getWaves()
             wave.total = getInt("numberofenemys", 1, section, path);
             wave.types = getInt("typesofenemys", 1, section, path);
 
-            for(int j = 1; j <= getInt("number", 1, section, path); ++j)
+            for(int j = 1; j <= wave.types; ++j)
             {
                 ss2 << "Enemy";
                 ss2 << j;

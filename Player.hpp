@@ -1,4 +1,5 @@
 #include "MovingEntity.hpp"
+#include "powerUp.hpp"
 #include "Weapon.hpp"
 
 #ifndef PLAYERqqq
@@ -9,7 +10,8 @@ class Player : public MovingEntity
 public:
     Player(){}
 
-    Player(float speed, int hp, Weapon weapon): weapon(weapon), MovingEntity(speed), hp(hp) {}
+    Player(float speed, int hp, Weapon weapon)
+    : weapon(weapon), MovingEntity(speed), hp(hp), powerUpDuration(0) {}
 
     int getHp();
 
@@ -18,14 +20,20 @@ public:
     void updateTimers(float elapsedTime);
     Weapon& getWeapon();
 
+    float getDmg();
+    float getSpeed();
+
     void attack();
 
-    //void setPowerUp(PowerUp powerup);
+    void setPowerUp(PowerUp powerUp);
 
 private:
-    //PowerUp powerup;
+
+
     Weapon weapon;
     int hp;
+    PowerUp powerUp;
+    float powerUpDuration;
 };
 
 #endif

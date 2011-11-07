@@ -20,21 +20,27 @@ public:
     static Storage& getInstance();
 
     EnemyType getEnemyType(int index);
+    EnemyType getEnemyType(std::string name);
     void setEnemyTypes(std::vector<EnemyType> v);
 
     ProjectileType getProjectileType(int index);
+    ProjectileType getProjectileType(std::string name);
     void setProjectileTypes(std::vector<ProjectileType> v);
 
     ParticleType getParticleType(int index);
+    ParticleType getParticleType(std::string name);
     void setParticleTypes(std::vector<ParticleType> v);
 
     WeaponType getWeaponType(int index);
+    WeaponType getWeaponType(std::string name);
     void setWeaponTypes(std::vector<WeaponType> v);
 
     DecalType getDecalType(int index);
+    DecalType getDecalType(std::string name);
     void setDecalTypes(std::vector<DecalType> v);
 
     PowerUpType getPowerUpType(int index);
+    PowerUpType getPowerUpType(std::string name);
     void setPowerUpTypes(std::vector<PowerUpType> v);
 
     WaveType getWaveType(int index);
@@ -44,6 +50,7 @@ public:
     sf::Image& getImage(std::string name);
 
     float getRandom(float begin, float end);
+    int getRandom(int begin, int end);
 
 private:
     Storage();
@@ -51,7 +58,7 @@ private:
     Storage(Storage const& copy);
     Storage& operator=(Storage const& copy);
 
-    std::vector<EnemyType> enemys;
+    std::vector<EnemyType> enemies;
     std::vector<ProjectileType> projectiles;
     std::vector<ParticleType> particles;
     std::vector<WeaponType> weapons;

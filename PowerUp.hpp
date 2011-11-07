@@ -8,19 +8,23 @@
 class PowerUp : public StillObject
 {
 public:
-    PowerUp(){}
+    PowerUp(): speedScale(1), damageScale(1){}
 
     PowerUp(PowerUpType poweruptype, sf::Vector2f pos, float rot)
-        : StillObject(poweruptype, pos, rot), speedscale(poweruptype.speedScale), damagescale(poweruptype.damageScale), heal(poweruptype.heal) {}
+        : StillObject(poweruptype, pos, rot), speedScale(poweruptype.speedScale), damageScale(poweruptype.damageScale), heal(poweruptype.heal) {}
 
     int getHeal();
+
     float getSpeedScale();
+    void setSpeedScale(float speedScale);
+
     float getDamageScale();
+    void setDamageScale(float damageScale);
 
 
 private:
     int heal;
-    float speedscale, damagescale;
+    float speedScale, damageScale;
 };
 
 #endif

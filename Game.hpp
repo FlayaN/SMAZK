@@ -55,20 +55,19 @@ private:
     std::vector<Particle> particles;
     std::vector<Decal> decals;
     std::vector<PowerUp> powerups;
+
     Player player;
-    //Storage storage;
+    Config config;
+
+    int waves, currWave;
+    float elapsedTime, gameTime;
 
     sf::Clock clock;
     sf::Font font;
     sf::String text;
-    float elapsedTime, gameTime;
-
     sf::RenderWindow& window;
     sf::Event event;
     sf::Sprite crosshair, bg;
-
-    Config config;
-
     sf::Image playerImg,crosshairImg,PBulletImg, bgImg;
 };
 #endif

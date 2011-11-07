@@ -6,10 +6,20 @@ int PowerUp::getHeal()
 }
 float PowerUp::getSpeedScale()
 {
-    return speedscale;
-}
-float PowerUp::getDamageScale()
-{
-    return damagescale;
+    return speedScale;
 }
 
+void PowerUp::setSpeedScale(float speedScale)
+{
+    this->speedScale = speedScale;
+}
+
+float PowerUp::getDamageScale()
+{
+    return damageScale;
+}
+
+void PowerUp::setDamageScale(float damageScale)
+{
+    this->damageScale = damageScale;
+}
