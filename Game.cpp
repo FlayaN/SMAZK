@@ -15,6 +15,7 @@ Game::Game(sf::RenderWindow& window)
     crosshairImg.LoadFromFile("resources\\images\\crosshair.png");
     bgImg.LoadFromFile("resources\\images\\floor.png");
     font.LoadFromFile("resources\\zombie.ttf");
+    soundBuffer.LoadFromFile("resources\\sounds\\pistol.wav");
     bg.SetImage(bgImg);
     window.ShowMouseCursor(false);
     gameTime=0;
@@ -36,19 +37,6 @@ void Game::initStorage()
 
     waves = config.getInt("number", 1, "init", "resources\\ini\\waves.ini");
 
-    //srand((unsigned) time(0));
-    /*for (int i = 0; i < 50; ++i)
-    {
-        enemies.push_back(Enemy(storage.getEnemyType(0), sf::Vector2f((rand() % SCREEN_SIZE_WIDTH),(rand() % SCREEN_SIZE_HEIGHT))));
-    }
-
-    for (int i = 50; i < 100; ++i)
-    {
-        enemies.push_back(Enemy(storage.getEnemyType(1), sf::Vector2f((rand() % SCREEN_SIZE_WIDTH),(rand() % SCREEN_SIZE_HEIGHT))));
-    }
-    enemies.push_back(Enemy(storage.getEnemyType(2), sf::Vector2f((rand() % SCREEN_SIZE_WIDTH),(rand() % SCREEN_SIZE_HEIGHT))));
-*/
-
     player = Player(3.0f, 100,Weapon(storage.getWeaponType(0), sf::Vector2f(player.GetPosition()), player.GetRotation()));
     player.SetImage(playerImg);
     player.SetPosition(500.0f,300.0f);
@@ -56,11 +44,6 @@ void Game::initStorage()
 
     crosshair.SetImage(crosshairImg);
     crosshair.SetCenter(crosshairImg.GetWidth()/2,crosshairImg.GetHeight()/2);
-
-    PowerUp tmp_powerup(storage.getPowerUpType(0), sf::Vector2f(200, 400), 0);
-    PowerUp tmp_powerup2(storage.getPowerUpType(1), sf::Vector2f(400, 400), 0);
-    powerups.push_back(tmp_powerup);
-    powerups.push_back(tmp_powerup2);
 
     text.SetFont(font);
     text.SetSize(50);
@@ -80,7 +63,6 @@ void Game::run()
         updateGameState();
     }
 }
-//void playSounds() {}
 
 void Game::draw()
 {
@@ -128,6 +110,7 @@ void Game::updateGameState()
     collide();
     updateTimers();
     killObjects();
+    playSounds();
 }
 
 void Game::spawn()
@@ -143,7 +126,7 @@ void Game::spawn()
             {
                 sf::Vector2f pos;
 
-                int randInt = Storage::getInstance().getRandom(0,3);
+                int randInt = Storage::getInstance().getRandom(0, 3);
                 switch(randInt)
                 {
                 case 0:
@@ -162,6 +145,12 @@ void Game::spawn()
                 enemies.push_back(Enemy(Storage::getInstance().getEnemyType(tmp_wave.enemys[i]), pos));
             }
         }
+        int random = Storage::getInstance().getRandom(0, currWave);
+        for(unsigned int i = 0; i < random; ++i)
+        {
+            int randInt = Storage::getInstance().getRandom(0, config.getInt("number", 1, "init", "resources\\ini\\powerups.ini") - 1);
+            powerups.push_back(PowerUp(Storage::getInstance().getPowerUpType(randInt), sf::Vector2f(Storage::getInstance().getRandom(0, SCREEN_SIZE_WIDTH), Storage::getInstance().getRandom(0, SCREEN_SIZE_HEIGHT)), 0));
+        }
     }
 }
 
@@ -170,7 +159,7 @@ void Game::moveEntities()
     //Moves Enemies
     for (unsigned int i = 0; i < enemies.size(); ++i)
     {
-        float speed = enemies[i].getSpeed();//*0.1;
+        float speed = enemies[i].getSpeed();
         float rotation = (Utility::calcAngle(player.GetPosition(),enemies[i].GetPosition()))+PI/2;
         float dx = speed*std::cos(rotation);
         float dy = speed*std::sin(rotation);
@@ -241,6 +230,7 @@ void Game::attack()
         Projectile tmp_projectile = Projectile(Storage::getInstance().getProjectileType(0), sf::Vector2f(player.GetPosition()), player.GetRotation());
         generateShellParticle(tmp_projectile.GetPosition(),tmp_projectile.GetRotation(), Storage::getInstance().getParticleType(2));
         projectiles.push_back(tmp_projectile);
+        //sounds.push_back(sf::Sound());
     }
 }
 
@@ -282,7 +272,6 @@ void Game::collide()
             player.setHp(player.getHp() + powerups[i].getHeal());
 
             player.setPowerUp(powerups[i]);
-            //player.setSpeed(player.getSpeed() * powerups[i].getSpeedScale());
             powerups[i].setDead();
         }
     }
@@ -311,6 +300,15 @@ void Game::killObjects()
     enemies.erase(std::remove_if(enemies.begin(),enemies.end(),movingEntity::isDead),enemies.end());
     particles.erase(std::remove_if(particles.begin(),particles.end(),movingEntity::isDead),particles.end());
     powerups.erase(std::remove_if(powerups.begin(),powerups.end(),stillObject::isDead),powerups.end());
+}
+
+void Game::playSounds()
+{
+    for(int i = 0; i < sounds.size(); ++i)
+    {
+        sounds[i].SetBuffer(soundBuffer);
+        sounds[i].Play();
+    }
 }
 
 void Game::generateBloodParticle(sf::Vector2f pos, float rot, ParticleType pt)

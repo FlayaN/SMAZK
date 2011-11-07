@@ -160,7 +160,7 @@
 	"Storage.hpp"
 	<iostream>
 
-1320588818 source:c:\users\hannes\smazk\config.cpp
+1320691221 source:c:\users\hannes\smazk\config.cpp
 	"Config.hpp"
 	<iostream>
 	<Windows.h>
@@ -210,12 +210,12 @@
 	<string>
 	"Enemy.hpp"
 
-1320531189 c:\users\hannes\smazk\enemy.hpp
+1320691221 c:\users\hannes\smazk\enemy.hpp
 	<string>
 	"MovingEntity.hpp"
 	"EnemyType.hpp"
 
-1320531191 c:\users\hannes\smazk\movingentity.hpp
+1320691221 c:\users\hannes\smazk\movingentity.hpp
 	"EnemyType.hpp"
 	"ProjectileType.hpp"
 	"ParticleType.hpp"
@@ -223,29 +223,31 @@
 	"Storage.hpp"
 	<string>
 
-1320591717 source:c:\users\hannes\smazk\game.cpp
+1320693836 source:c:\users\hannes\smazk\game.cpp
 	"Game.hpp"
 
-1320517648 c:\users\hannes\smazk\player.hpp
+1320691221 c:\users\hannes\smazk\player.hpp
 	"MovingEntity.hpp"
+	"powerUp.hpp"
 	"Weapon.hpp"
 
-1320531004 c:\users\hannes\smazk\weapon.hpp
+1320691221 c:\users\hannes\smazk\weapon.hpp
 	<string>
 	"StillObject.hpp"
 	"WeaponType.hpp"
 
-1320531218 c:\users\hannes\smazk\stillobject.hpp
+1320691221 c:\users\hannes\smazk\stillobject.hpp
 	"SFML/Graphics.hpp"
 	"DecalType.hpp"
 	"WeaponType.hpp"
+	"PowerUpType.hpp"
 	"Storage.hpp"
 	<string>
 
-1320530985 c:\users\hannes\smazk\projectile.hpp
+1320691221 c:\users\hannes\smazk\projectile.hpp
 	"MovingEntity.hpp"
 
-1320530527 c:\users\hannes\smazk\storage.hpp
+1320691221 c:\users\hannes\smazk\storage.hpp
 	"EnemyType.hpp"
 	"ProjectileType.hpp"
 	"ParticleType.hpp"
@@ -256,28 +258,29 @@
 	"SFML/Graphics.hpp"
 	<string>
 	<map>
+	<ctime>
 
-1320588121 source:c:\users\hannes\smazk\movingentity.cpp
+1320691221 source:c:\users\hannes\smazk\movingentity.cpp
 	"MovingEntity.hpp"
 	"Storage.hpp"
 	<iostream>
 
-1320517648 source:c:\users\hannes\smazk\player.cpp
+1320691221 source:c:\users\hannes\smazk\player.cpp
 	"Player.hpp"
 
 1320517648 source:c:\users\hannes\smazk\projectile.cpp
 	<string>
 	"Projectile.hpp"
 
-1320588184 source:c:\users\hannes\smazk\stillobject.cpp
+1320691221 source:c:\users\hannes\smazk\stillobject.cpp
 	<string>
 	"StillObject.hpp"
 
-1320529913 source:c:\users\hannes\smazk\storage.cpp
+1320691221 source:c:\users\hannes\smazk\storage.cpp
 	"Storage.hpp"
 	<iostream>
 
-1320530925 source:c:\users\hannes\smazk\weapon.cpp
+1320691221 source:c:\users\hannes\smazk\weapon.cpp
 	"Weapon.hpp"
 	"Projectile.hpp"
 	<iostream>
@@ -309,26 +312,24 @@
 
 1320513780 source:c:\users\yngve\smazk\decal.cpp
 
-1320530972 c:\users\hannes\smazk\particle.hpp
+1320691221 c:\users\hannes\smazk\particle.hpp
 	"MovingEntity.hpp"
 	"ParticleType.hpp"
 	"SFML/Graphics.hpp"
 
-1320531013 c:\users\hannes\smazk\decal.hpp
+1320691221 c:\users\hannes\smazk\decal.hpp
 	<string>
 	"StillObject.hpp"
 	"DecalType.hpp"
 
-1320531150 source:c:\users\hannes\smazk\particle.cpp
+1320691221 source:c:\users\hannes\smazk\particle.cpp
 	<string>
 	"Particle.hpp"
 	<iostream>
 
-1320591479 c:\users\hannes\smazk\game.hpp
-	<vector>
-	<algorithm>
-	<iterator>
-	<SFML/Graphics.hpp>
+1320693733 c:\users\hannes\smazk\game.hpp
+	"SFML/Graphics.hpp"
+	"SFML/Audio.hpp"
 	"EnemyType.hpp"
 	"Projectile.hpp"
 	"ParticleType.hpp"
@@ -341,16 +342,22 @@
 	"Storage.hpp"
 	"Particle.hpp"
 	"Decal.hpp"
+	"Utility.hpp"
+	"PowerUp.hpp"
 	<cmath>
 	<cstdlib>
 	<ctime>
 	<iostream>
 	<sstream>
+	<vector>
+	<algorithm>
+	<iterator>
 
 1320524782 c:\users\hannes\smazk\wavetype.hpp
 	<string>
 
-1320525724 source:c:\users\hannes\smazk\powerup.cpp
+1320691221 source:c:\users\hannes\smazk\powerup.cpp
+	"PowerUp.hpp"
 
 1320599430 c:\users\yngve\smazk\wavetype.hpp
 	<string>
@@ -396,4 +403,18 @@
 	<string>
 	"StillObject.hpp"
 	"PowerUpType.hpp"
+
+1320691221 c:\users\hannes\smazk\powerup.hpp
+	<string>
+	"StillObject.hpp"
+	"PowerUpType.hpp"
+
+1320691221 c:\users\hannes\smazk\utility.hpp
+	"SFML/Graphics.hpp"
+	<string>
+	<cmath>
+	<sstream>
+
+1320691221 source:c:\users\hannes\smazk\utility.cpp
+	"Utility.hpp"
 
