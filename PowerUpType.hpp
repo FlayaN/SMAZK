@@ -8,5 +8,6 @@ public:
     float damageScale;
     float speedScale;
     int heal;
+    std::string sound;
 };
 #endif

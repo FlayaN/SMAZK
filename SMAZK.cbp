@@ -40,7 +40,9 @@
 		</Compiler>
 		<Unit filename="Config.cpp" />
 		<Unit filename="Config.hpp" />
+		<Unit filename="Decal.cpp" />
 		<Unit filename="Decal.hpp" />
+		<Unit filename="DecalType.hpp" />
 		<Unit filename="Enemy.cpp" />
 		<Unit filename="Enemy.hpp" />
 		<Unit filename="EnemyType.hpp" />
@@ -56,9 +58,12 @@
 		<Unit filename="Player.hpp" />
 		<Unit filename="PowerUp.cpp" />
 		<Unit filename="PowerUp.hpp" />
+		<Unit filename="PowerUpType.hpp" />
 		<Unit filename="Projectile.cpp" />
 		<Unit filename="Projectile.hpp" />
 		<Unit filename="ProjectileType.hpp" />
+		<Unit filename="Sound.cpp" />
+		<Unit filename="Sound.hpp" />
 		<Unit filename="StillObject.cpp" />
 		<Unit filename="StillObject.hpp" />
 		<Unit filename="Storage.cpp" />

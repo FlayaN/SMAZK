@@ -24,6 +24,7 @@
 #include <vector>
 #include <algorithm>
 #include <iterator>
+#include <queue>
 
 #ifndef GAMEqqq
 #define GAMEqqq
@@ -43,7 +44,6 @@ public:
     void collide();
     void updateTimers();
     void killObjects();
-    void playSounds();
 
     void generateBloodParticle(sf::Vector2f pos, float rot, ParticleType pt);
     void generateShellParticle(sf::Vector2f pos, float rot, ParticleType pt);
@@ -71,8 +71,5 @@ private:
     sf::Event event;
     sf::Sprite crosshair, bg;
     sf::Image playerImg,crosshairImg,PBulletImg, bgImg;
-    sf::SoundBuffer soundBuffer;
-
-    std::vector<sf::Sound> sounds;
 };
 #endif

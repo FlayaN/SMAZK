@@ -15,7 +15,6 @@ Game::Game(sf::RenderWindow& window)
     crosshairImg.LoadFromFile("resources\\images\\crosshair.png");
     bgImg.LoadFromFile("resources\\images\\floor.png");
     font.LoadFromFile("resources\\zombie.ttf");
-    soundBuffer.LoadFromFile("resources\\sounds\\pistol.wav");
     bg.SetImage(bgImg);
     window.ShowMouseCursor(false);
     gameTime=0;
@@ -110,7 +109,6 @@ void Game::updateGameState()
     collide();
     updateTimers();
     killObjects();
-    playSounds();
 }
 
 void Game::spawn()
@@ -230,7 +228,7 @@ void Game::attack()
         Projectile tmp_projectile = Projectile(Storage::getInstance().getProjectileType(0), sf::Vector2f(player.GetPosition()), player.GetRotation());
         generateShellParticle(tmp_projectile.GetPosition(),tmp_projectile.GetRotation(), Storage::getInstance().getParticleType(2));
         projectiles.push_back(tmp_projectile);
-        //sounds.push_back(sf::Sound());
+        player.getWeapon().playSound();
     }
 }
 
@@ -256,10 +254,12 @@ void Game::collide()
                 //std::cout << enemies[i].getHp() << std::endl;
                 generateBloodParticle(projectiles[j].GetPosition(),projectiles[j].GetRotation(), Storage::getInstance().getParticleType(0));
                 projectiles[j].setDead();
+                enemies[i].playSound();
                 if(enemies[i].getHp() <= 0)
                 {
+                    enemies[i].playSound();
                     enemies[i].setDead();
-                    generateDecal(enemies[i], Storage::getInstance().getDecalType(1));
+                    generateDecal(enemies[i], Storage::getInstance().getDecalType(enemies[i].getDecal()));
                 }
             }
         }
@@ -270,7 +270,6 @@ void Game::collide()
         if (v.x <= (player.GetSize().x+powerups[i].GetSize().x)/2 && v.y <= (player.GetSize().y+powerups[i].GetSize().y)/2)
         {
             player.setHp(player.getHp() + powerups[i].getHeal());
-
             player.setPowerUp(powerups[i]);
             powerups[i].setDead();
         }
@@ -300,15 +299,6 @@ void Game::killObjects()
     enemies.erase(std::remove_if(enemies.begin(),enemies.end(),movingEntity::isDead),enemies.end());
     particles.erase(std::remove_if(particles.begin(),particles.end(),movingEntity::isDead),particles.end());
     powerups.erase(std::remove_if(powerups.begin(),powerups.end(),stillObject::isDead),powerups.end());
-}
-
-void Game::playSounds()
-{
-    for(int i = 0; i < sounds.size(); ++i)
-    {
-        sounds[i].SetBuffer(soundBuffer);
-        sounds[i].Play();
-    }
 }
 
 void Game::generateBloodParticle(sf::Vector2f pos, float rot, ParticleType pt)

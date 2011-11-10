@@ -9,7 +9,7 @@ Weapon::Weapon(float attackSpeed, std::string name, std::string projectile)
     attackCooldown = 0;
 }
 Weapon::Weapon(WeaponType weapontype, sf::Vector2f pos, float rot)
-    : StillObject(weapontype, pos, rot), attackSpeed(weapontype.speed), ammo(weapontype.ammo), projectile(weapontype.projectile)
+    : StillObject(weapontype, pos, rot), Sound(weapontype.sound), attackSpeed(weapontype.speed), ammo(weapontype.ammo), projectile(weapontype.projectile)
 {
     attackCooldown = 0;
 }
@@ -33,6 +33,8 @@ std::string Weapon::getProjectile()
 void Weapon::attack()
 {
     attackCooldown = attackSpeed;
+    --ammo;
+    std::cout << ammo << std::endl;
 }
 
 int Weapon::getAmmo()

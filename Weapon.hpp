@@ -1,11 +1,12 @@
 #include <string>
 #include "StillObject.hpp"
 #include "WeaponType.hpp"
+#include "Sound.hpp"
 
 #ifndef WEAPONqqq
 #define WEAPONqqq
 
-class Weapon : public StillObject
+class Weapon : public StillObject, public Sound
 {
 public:
     Weapon(){}

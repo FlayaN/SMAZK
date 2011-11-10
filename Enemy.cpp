@@ -11,3 +11,8 @@ void Enemy::setHp(int hp)
     this->hp = hp;
 }
 
+std::string Enemy::getDecal()
+{
+    return decal;
+}
+

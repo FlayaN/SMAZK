@@ -27,7 +27,7 @@ std::vector<EnemyType> Config::getEnemys()
             enemy.particle = getString("particle","", section, path);
             enemy.decal = getString("decal","", section, path);
             enemy.weapon = getString("weapon","", section, path);
-            enemy.sound = getString("sound","", section, path);
+            enemy.sound = ("resources\\sounds\\" + getString("hitsound","", section, path));
             enemy.dmg = getInt("damage", 1, section, path);
 
             v.push_back(enemy);
@@ -62,7 +62,6 @@ std::vector<ProjectileType> Config::getProjectiles()
             projectile.scale = getFloat("scale", 1.0F, section, path);
             projectile.speed = getFloat("speed", 1.0F, section, path);
             projectile.particle = getString("particle", "", section, path);
-            //projectile.weapon = getString("weapon", "", section, path);
 
             v.push_back(projectile);
             ss.str("");
@@ -95,6 +94,7 @@ std::vector<WeaponType> Config::getWeapons()
             weapon.projectile = getString("projectile", "", section, path);
             weapon.scale = getFloat("scale", 1.0F, section, path);
             weapon.speed = getFloat("speed", 1.0F, section, path);
+            weapon.sound = ("resources\\sounds\\" + getString("sound", "", section, path));
             v.push_back(weapon);
             ss.str("");
             ss.clear();
@@ -127,6 +127,7 @@ std::vector<PowerUpType> Config::getPowerUps()
             powerup.scale = getFloat("scale", 1.0F, section, path);
             powerup.name = getString("name", "", section, path);
             powerup.model = ("resources\\images\\" + getString("model", "", section, path));
+            powerup.sound = ("resources\\sounds\\" + getString("sound", "", section, path));
 
             v.push_back(powerup);
             ss.str("");
@@ -157,6 +158,7 @@ std::vector<DecalType> Config::getDecals()
             decal.scale = getFloat("scale", 1.0F, section, path);
             decal.name = getString("name", "", section, path);
             decal.model = ("resources\\images\\" + getString("model", "", section, path));
+            decal.sound = ("resources\\sounds\\" + getString("sound", "", section, path));
 
             v.push_back(decal);
             ss.str("");

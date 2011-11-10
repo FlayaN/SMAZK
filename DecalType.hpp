@@ -4,5 +4,7 @@
 #define DECALTYPEqqq
 class DecalType : public TemplateType
 {
+public:
+    std::string sound;
 };
 #endif

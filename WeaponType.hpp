@@ -6,7 +6,7 @@ class WeaponType : public TemplateType
 {
 public:
     int ammo;
-    std::string projectile;
+    std::string projectile, sound;
     float speed;
 };
 #endif
