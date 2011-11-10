@@ -283,3 +283,29 @@ std::string Config::getString(char* key, const char* defaultValue, char* categor
     ss >> temp;
     return temp;
 }
+
+void Config::setInt(char* key, int value, char* category, char* fileName)
+{
+ char value_d[255];
+ sprintf(value_d, "%d", value);
+ WritePrivateProfileString(category, key, value_d, fileName);
+}
+
+void Config::setFloat(char* key, float value, char* category, char* fileName)
+{
+    char value_d[255];
+    sprintf(value_d, "%f", value);
+    WritePrivateProfileString(category, key, value_d, fileName);
+}
+
+void Config::setBool(char* key, bool value, char* category, char* fileName)//char* szSection, char* szKey, bool bolValue)
+{
+    char value_d[255];
+    sprintf(value_d, "%s", value ? "True" : "False");
+    WritePrivateProfileString(category, key, value_d, fileName);
+}
+
+void Config::setString(char* key, char* value, char* category, char* fileName)//char* szSection, char* szKey, char* szValue)
+{
+    WritePrivateProfileString(category, key, value, fileName);
+}

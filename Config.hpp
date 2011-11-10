@@ -19,9 +19,15 @@ public:
     std::vector<DecalType> getDecals();
     std::vector<ParticleType> getParticles();
     std::vector<WaveType> getWaves();
+
     int getInt(char* key, int defaultValue, char* category, char* fileName);
     float getFloat(char* key, float defaultValue, char* category, char* fileName);
     bool getBool(char* key, bool defaultValue, char* category, char* fileName);
     std::string getString(char* key, const char* defaultValue, char* category, char* fileName);
+
+    void setInt(char* key, int value, char* category, char* fileName);
+    void setFloat(char* key, float value, char* category, char* fileName);
+    void setBool(char* key, bool value, char* category, char* fileName);
+    void setString(char* key, char* value, char* category, char* fileName);
 };
 #endif
