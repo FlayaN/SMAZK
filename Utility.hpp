@@ -13,5 +13,7 @@ namespace Utility
     float calcDistance(sf::Vector2f p1, sf::Vector2f p2);
     sf::Vector2f calcDistanceV(sf::Vector2f p1, sf::Vector2f p2);
     std::string int2Str(int x);
+
+    bool contains(sf::Sprite sp, int x, int y);
 }
 #endif

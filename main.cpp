@@ -1,6 +1,8 @@
 #include <iostream>
-#include <SFML/Graphics.hpp>
+#include "SFML/Graphics.hpp"
 #include "Game.hpp"
+#include "Menu.hpp"
+
 #include <cstdlib>
 #include <ctime>
 
@@ -11,13 +13,28 @@
 
 int main()
 {
+    sf::Event event;
+    bool menurun = true;
     // Create the main rendering window
     sf::RenderWindow window(sf::VideoMode(SCREEN_SIZE_WIDTH, SCREEN_SIZE_HEIGHT, SCREEN_BIT_SIZE), "Super Mega Awesome Zombie Killer");
     window.SetFramerateLimit(60);
     window.UseVerticalSync(true);
-    Game game(window);
-    game.run();
+    window.ShowMouseCursor(false);
 
+    Menu menu(window);
+    Game game(window);
+
+    while (window.IsOpened())
+    {
+        if(menurun==true)
+        {
+            menurun = menu.run();
+        }
+        else
+        {
+            game.run();
+        }
+    }
     return EXIT_SUCCESS;
 }
 

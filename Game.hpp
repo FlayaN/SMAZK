@@ -60,7 +60,6 @@ private:
 
     Player player;
     Config config;
-
     int waves, currWave;
     float elapsedTime, gameTime;
 

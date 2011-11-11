@@ -48,7 +48,12 @@
 		<Unit filename="EnemyType.hpp" />
 		<Unit filename="Game.cpp" />
 		<Unit filename="Game.hpp" />
+		<Unit filename="Gui.cpp" />
 		<Unit filename="Gui.hpp" />
+		<Unit filename="GuiButton.cpp" />
+		<Unit filename="GuiButton.hpp" />
+		<Unit filename="Menu.cpp" />
+		<Unit filename="Menu.hpp" />
 		<Unit filename="MovingEntity.cpp" />
 		<Unit filename="MovingEntity.hpp" />
 		<Unit filename="Particle.cpp" />

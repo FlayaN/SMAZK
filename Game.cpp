@@ -15,8 +15,6 @@ Game::Game(sf::RenderWindow& window)
     crosshairImg.LoadFromFile("resources\\images\\crosshair.png");
     bgImg.LoadFromFile("resources\\images\\floor.png");
     font.LoadFromFile("resources\\zombie.ttf");
-    bg.SetImage(bgImg);
-    window.ShowMouseCursor(false);
     gameTime=0;
     currWave=-1;
     initStorage();
@@ -41,6 +39,8 @@ void Game::initStorage()
     player.SetPosition(500.0f,300.0f);
     player.SetCenter(playerImg.GetWidth()/2,playerImg.GetHeight()/2);
 
+    bg.SetImage(bgImg);
+
     crosshair.SetImage(crosshairImg);
     crosshair.SetCenter(crosshairImg.GetWidth()/2,crosshairImg.GetHeight()/2);
 
@@ -51,16 +51,15 @@ void Game::initStorage()
 
 void Game::run()
 {
-    while (window.IsOpened())
+    while (window.GetEvent(event)) //Have to exist to update inputs
     {
-        draw();
-        while (window.GetEvent(event)) //Have to exist to update inputs
+        if (event.Type == sf::Event::Closed)
         {
-            if (event.Type == sf::Event::Closed)
-                window.Close();
+            window.Close();
         }
-        updateGameState();
     }
+    draw();
+    updateGameState();
 }
 
 void Game::draw()

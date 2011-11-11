@@ -21,3 +21,19 @@ std::string Utility::int2Str(int x)
   ss << x;
   return ss.str();
 }
+
+bool Utility::contains(sf::Sprite sp, int x, int y){
+
+    float posX1 = sp.GetPosition().x - sp.GetSize().x/2;
+    float posY1 = sp.GetPosition().y - sp.GetSize().y/2;
+    //sf::Vector2f center = sp.GetCenter();
+    float posX2 = sp.GetPosition().x + sp.GetSize().x/2;
+    float posY2 = sp.GetPosition().y + sp.GetSize().y/2;
+    //sf::Vector2f
+    //if(s
+    if(x > posX1 && x < posX2 && y > posY1 && y < posY2)
+         return true;
+
+    return false;
+
+}
