@@ -11,9 +11,16 @@ void Gui::addButton(sf::Image& image, sf::Vector2f pos, int targetMenu)
     buttons.push_back(tmp_button);
 }
 
-void Gui::addText(sf::String text, sf::Vector2f pos)
+void Gui::addText(std::string text, sf::Font& font, sf::Vector2f pos)
 {
+    sf::String tmp_text;
+    tmp_text.SetFont(font);
+    tmp_text.SetSize(50);
+    tmp_text.SetColor(sf::Color(255, 255, 255, 255));
+    tmp_text.SetText(text);
+    tmp_text.SetPosition(pos);
 
+    texts.push_back(tmp_text);
 }
 
 void Gui::addImage(sf::Image& image, sf::Vector2f pos)

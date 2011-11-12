@@ -15,6 +15,8 @@ int main()
 {
     sf::Event event;
     bool menurun = true;
+    bool gamerun = true;
+
     // Create the main rendering window
     sf::RenderWindow window(sf::VideoMode(SCREEN_SIZE_WIDTH, SCREEN_SIZE_HEIGHT, SCREEN_BIT_SIZE), "Super Mega Awesome Zombie Killer");
     window.SetFramerateLimit(60);
@@ -32,7 +34,15 @@ int main()
         }
         else
         {
-            game.run();
+            if(gamerun == true)
+            {
+                gamerun = !game.run();
+
+            }
+            else
+            {
+                menurun = true;
+            }
         }
     }
     return EXIT_SUCCESS;

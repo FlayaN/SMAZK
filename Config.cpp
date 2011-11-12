@@ -247,6 +247,36 @@ std::vector<WaveType> Config::getWaves()
     return v;
 }
 
+std::vector<HighScoreType> Config::getHighScores()
+{
+    std::vector<HighScoreType> v;
+    HighScoreType highscore;
+    std::stringstream ss;
+    char* path = "resources\\ini\\highscores.ini";
+    std::cout << "Highscores: " << getInt("number", 1, "init", path) << std::endl;
+    char section[32];
+    try{
+        for(int count = 1; count <= 3; count++)
+        {
+            ss << "Highscore";
+            ss << count;
+            ss >> section;
+
+            highscore.point = getInt("point", 1, section, path);
+            highscore.order = getInt("order", 1, section, path);
+
+            v.push_back(highscore);
+            ss.str("");
+            ss.clear();
+        }
+    }
+    catch(...)
+    {
+        std::cout << "error";
+    }
+    return v;
+}
+
 int Config::getInt(char* key, int defaultValue, char* category, char* fileName)
 {
     return GetPrivateProfileInt(category, key, defaultValue, fileName);

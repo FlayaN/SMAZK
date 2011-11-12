@@ -35,7 +35,7 @@ public:
     Game(sf::RenderWindow& window);
 
     void initStorage();
-    void run();
+    bool run();
     void draw();
     void updateGameState();
     void spawn();
@@ -44,6 +44,7 @@ public:
     void collide();
     void updateTimers();
     void killObjects();
+    void highScore(int score);
 
     void generateBloodParticle(sf::Vector2f pos, float rot, ParticleType pt);
     void generateShellParticle(sf::Vector2f pos, float rot, ParticleType pt);
@@ -62,6 +63,7 @@ private:
     Config config;
     int waves, currWave;
     float elapsedTime, gameTime;
+    bool finished;
 
     sf::Clock clock;
     sf::Font font;

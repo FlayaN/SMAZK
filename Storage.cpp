@@ -160,6 +160,16 @@ void Storage::setWaveTypes(std::vector<WaveType> v)
     waves = v;
 }
 
+HighScoreType Storage::getHighScoreType(int index)
+{
+    return highscores[index];
+}
+
+void Storage::setHighScoreType(std::vector<HighScoreType> v)
+{
+    highscores = v;
+}
+
 void Storage::setImages()
 {
     sf::Image tempimage;

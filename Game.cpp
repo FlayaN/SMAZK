@@ -11,12 +11,14 @@
 Game::Game(sf::RenderWindow& window)
     : window(window)
 {
+    std::cout<<"hejsan\n";
     playerImg.LoadFromFile("resources\\images\\player.png");
     crosshairImg.LoadFromFile("resources\\images\\crosshair.png");
     bgImg.LoadFromFile("resources\\images\\floor.png");
     font.LoadFromFile("resources\\zombie.ttf");
     gameTime=0;
     currWave=-1;
+    finished = false;
     initStorage();
 }
 
@@ -49,7 +51,7 @@ void Game::initStorage()
     text.SetColor(sf::Color(255, 0, 0, 255));
 }
 
-void Game::run()
+bool Game::run()
 {
     while (window.GetEvent(event)) //Have to exist to update inputs
     {
@@ -60,6 +62,7 @@ void Game::run()
     }
     draw();
     updateGameState();
+    return finished;
 }
 
 void Game::draw()
@@ -100,7 +103,7 @@ void Game::updateGameState()
     gameTime += elapsedTime;
     clock.Reset();
     //text.SetText("Enemys " + Utility::int2Str(enemies.size()));
-    text.SetText("Wave " + Utility::int2Str(currWave+1) + " enemys " + Utility::int2Str(enemies.size()) + " playerhp " + Utility::int2Str(player.getHp()));
+    text.SetText("Wave " + Utility::int2Str(currWave+1) + " enemys " + Utility::int2Str(enemies.size()) + " playerhp " + Utility::int2Str(player.getHp()) + " gametime " + Utility::int2Str(gameTime));
 
     spawn();
     moveEntities();
@@ -240,7 +243,11 @@ void Game::collide()
         sf::Vector2f v = Utility::calcDistanceV(enemies[i].GetPosition(),player.GetPosition());
         if (v.x <= (player.GetSize().x+enemies[i].GetSize().x)/2 && v.y <= (player.GetSize().y+enemies[i].GetSize().y)/2) //if the distance in x and y are less than the size of player+enemie/2 cause both player and enemy has a size.
         {
-            if ( player.getHp() <= 0) std::cout << "";
+            if ( player.getHp() <= 0)
+            {
+                int tmp_gameTime = gameTime;
+                highScore(tmp_gameTime);
+            }
             player.setHp(player.getHp()-1);
             //std::cout << player.getHp() << std::endl;
         }
@@ -298,6 +305,38 @@ void Game::killObjects()
     enemies.erase(std::remove_if(enemies.begin(),enemies.end(),movingEntity::isDead),enemies.end());
     particles.erase(std::remove_if(particles.begin(),particles.end(),movingEntity::isDead),particles.end());
     powerups.erase(std::remove_if(powerups.begin(),powerups.end(),stillObject::isDead),powerups.end());
+}
+
+void Game::highScore(int score)
+{
+    int first = Storage::getInstance().getHighScoreType(0).point;
+    int second = Storage::getInstance().getHighScoreType(1).point;
+    int third = Storage::getInstance().getHighScoreType(2).point;
+
+    if(score >= first)
+    {
+        third = second;
+        second = first;
+        first = score;
+    }
+    else if(score < first && score >= second)
+    {
+        third = second;
+        second = score;
+    }
+    else if(score < second && score >= third)
+    {
+        third = score;
+    }
+    else
+    {
+        std::cout << "No highscore for you mister" << std::endl;
+    }
+    config.setInt("point", first, "Highscore1", "resources\\ini\\highscores.ini");
+    config.setInt("point", second, "Highscore2", "resources\\ini\\highscores.ini");
+    config.setInt("point", third, "Highscore3", "resources\\ini\\highscores.ini");
+    finished = true;
+    gameTime=0;
 }
 
 void Game::generateBloodParticle(sf::Vector2f pos, float rot, ParticleType pt)

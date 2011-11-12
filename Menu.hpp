@@ -1,5 +1,8 @@
 #include "SFML/Graphics.hpp"
 #include "Gui.hpp"
+#include "Storage.hpp"
+#include "Config.hpp"
+#include "Utility.hpp"
 
 #include <iostream>
 #include <vector>
@@ -19,14 +22,16 @@ public:
     void draw();
 private:
     sf::RenderWindow& window;
-    sf::Font font;
     sf::String text;
     sf::Sprite crosshair, bg;
     sf::Image crosshairImg, bgImg;
     sf::Event event;
     std::vector<Gui> guis;
+    std::string menutext;
+    Config config;
     //Gui mainscreen, highscore, options, exit, back;
     sf::Image newgameImg, highscoreImg, optionsImg, aboutImg, exitImg, backImg;
     int currMenu;
+    sf::Font font;
 };
 #endif
