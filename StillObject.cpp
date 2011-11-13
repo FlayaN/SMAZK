@@ -6,8 +6,6 @@ StillObject::StillObject(DecalType decaltype, sf::Vector2f pos, float rot)
 {
     //std::cout << dead << std::endl;
     this->SetImage(Storage::getInstance().getImage(decaltype.name));
-    this->SetScaleX(decaltype.scale);
-    this->SetScaleY(decaltype.scale);
     this->SetCenter(Storage::getInstance().getImage(decaltype.name).GetWidth()/2, Storage::getInstance().getImage(decaltype.name).GetHeight()/2);
     this->SetPosition(pos);
     this->SetRotation(rot);

@@ -7,11 +7,17 @@ int Player::getHp()
 void Player::setHp(int hp)
 {
     this->hp = hp;
+    if(this->hp > 100) this->hp = 100;
 }
 
 Weapon& Player::getWeapon()
 {
     return weapon;
+}
+
+void Player::setWeapon(Weapon weapon)
+{
+    this->weapon = weapon;
 }
 
 float Player::getDmg()
@@ -44,6 +50,6 @@ void Player::attack()
 void Player::setPowerUp(PowerUp powerUp)
 {
     this->powerUp = powerUp;
-    powerUp.playSound();
+    this->powerUp.playSound();
     powerUpDuration = 20;
 }

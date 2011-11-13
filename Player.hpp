@@ -14,14 +14,15 @@ public:
     : weapon(weapon), MovingEntity(speed), hp(hp), powerUpDuration(0) {}
 
     int getHp();
-
     void setHp(int hp);
 
-    void updateTimers(float elapsedTime);
     Weapon& getWeapon();
+    void setWeapon(Weapon weapon);
 
     float getDmg();
     float getSpeed();
+
+    void updateTimers(float elapsedTime);
 
     void attack();
 

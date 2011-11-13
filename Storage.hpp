@@ -19,6 +19,7 @@ class Storage
 {
 public:
     static Storage& getInstance();
+    //~Storage();
 
     EnemyType getEnemyType(int index);
     EnemyType getEnemyType(std::string name);
@@ -53,8 +54,13 @@ public:
     void setImages();
     sf::Image& getImage(std::string name);
 
+    void setSound(bool sound);
+    bool isSoundOn();
+
     float getRandom(float begin, float end);
     int getRandom(int begin, int end);
+
+    void resetStorage();
 
 private:
     Storage();
@@ -74,5 +80,6 @@ private:
     std::map<std::string, sf::Image> imagemap;
 
     sf::Randomizer random;
+    bool sound;
 };
 #endif

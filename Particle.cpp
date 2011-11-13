@@ -2,7 +2,7 @@
 #include "Particle.hpp"
 #include <iostream>
 
-Particle::Particle(ParticleType particletype, sf::Vector2f pos, float rot, float speed = 1.0f)
+Particle::Particle(ParticleType particletype, sf::Vector2f pos, float rot, float speed = 60.0f)
     : MovingEntity(particletype, pos, rot, speed)
 {
     duration = particletype.duration * (Storage::getInstance().getRandom(0.5f,1.5f));

@@ -16,6 +16,7 @@ int main()
     sf::Event event;
     bool menurun = true;
     bool gamerun = true;
+    bool newgame = true;
 
     // Create the main rendering window
     sf::RenderWindow window(sf::VideoMode(SCREEN_SIZE_WIDTH, SCREEN_SIZE_HEIGHT, SCREEN_BIT_SIZE), "Super Mega Awesome Zombie Killer");
@@ -24,24 +25,36 @@ int main()
     window.ShowMouseCursor(false);
 
     Menu menu(window);
-    Game game(window);
+    Game* game;
+    //Game* game = new game(window);
 
     while (window.IsOpened())
     {
-        if(menurun==true)
+        if(menurun)
         {
             menurun = menu.run();
+            if(!menurun)
+            {
+                newgame=true;
+            }
         }
         else
         {
-            if(gamerun == true)
+            if(newgame)
             {
-                gamerun = !game.run();
+                game = new Game(window);
+                newgame = false;
+                gamerun = true;
+            }
+            if(gamerun)
+            {
+                gamerun = !game->run();
 
             }
             else
             {
                 menurun = true;
+                delete game;
             }
         }
     }

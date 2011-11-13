@@ -11,7 +11,7 @@ class Decal : public StillObject, public Sound
 public:
     Decal(){}
 
-    Decal(DecalType decaltype, sf::Vector2f pos, float rot);
+    Decal(DecalType decaltype, sf::Vector2f pos, float rot, sf::Vector2f scale);
 };
 #endif
 

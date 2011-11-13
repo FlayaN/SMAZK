@@ -13,6 +13,7 @@ Menu::Menu(sf::RenderWindow& window)
     aboutImg.LoadFromFile("resources\\images\\About.png");
     exitImg.LoadFromFile("resources\\images\\Exit.png");
     backImg.LoadFromFile("resources\\images\\Back.png");
+    soundImg.LoadFromFile("resources\\images\\Sound.png");
     font.LoadFromFile("resources\\menutext.ttf");
 
     Storage::getInstance().setHighScoreType(config.getHighScores());
@@ -33,34 +34,17 @@ Menu::Menu(sf::RenderWindow& window)
     guis.push_back(mainscreen);
 
     Gui highscore;
-    menutext = "HighScore";
-    highscore.addText(menutext, font, sf::Vector2f((SCREEN_SIZE_WIDTH/2)-100, 50));
-
-    menutext = "First:";
-    highscore.addText(menutext, font, sf::Vector2f((SCREEN_SIZE_WIDTH/2)-120, 150));
-
-    menutext = Utility::int2Str(config.getInt("point", 1, "Highscore1", "resources\\ini\\highscores.ini"));
-    highscore.addText(menutext, font, sf::Vector2f((SCREEN_SIZE_WIDTH/2), 150));
-
-    menutext = "Second:";
-    highscore.addText(menutext, font, sf::Vector2f((SCREEN_SIZE_WIDTH/2)-120, 200));
-
-    menutext = Utility::int2Str(config.getInt("point", 1, "Highscore2", "resources\\ini\\highscores.ini"));
-    highscore.addText(menutext, font, sf::Vector2f((SCREEN_SIZE_WIDTH/2), 200));
-
-    menutext = "Third:";
-    highscore.addText(menutext, font, sf::Vector2f((SCREEN_SIZE_WIDTH/2)-120, 250));
-
-    menutext = Utility::int2Str(config.getInt("point", 1, "Highscore3", "resources\\ini\\highscores.ini"));
-    highscore.addText(menutext, font, sf::Vector2f((SCREEN_SIZE_WIDTH/2), 250));
-
-    highscore.addButton(backImg, sf::Vector2f(SCREEN_SIZE_WIDTH/2, SCREEN_SIZE_HEIGHT-50), 0);
-    guis.push_back(highscore);
+    guis.push_back(reloadHighScore(highscore));
 
     Gui options;
     menutext = "Options";
     options.addText(menutext, font, sf::Vector2f((SCREEN_SIZE_WIDTH/2)-70, 50));
     options.addButton(backImg, sf::Vector2f(SCREEN_SIZE_WIDTH/2, SCREEN_SIZE_HEIGHT-50), 0);
+
+    menutext = "Sound";
+    options.addText(menutext, font, sf::Vector2f((SCREEN_SIZE_WIDTH/2)-70, 150));
+    options.addSwitchButton(soundImg, sf::Vector2f((SCREEN_SIZE_WIDTH/2-20), 230), 1);
+
     guis.push_back(options);
 
     Gui about;
@@ -100,6 +84,7 @@ bool Menu::run()
         else if (event.Type == sf::Event::MouseButtonReleased)
         {
             std::vector<GuiButton>& buttons = guis[currMenu].getButtons();
+            std::vector<GuiButton>& switchButton = guis[currMenu].getSwitchButtons();
             for (unsigned int i = 0; i < buttons.size(); ++i)
             {
                 if(Utility::contains(buttons[i],event.MouseButton.X, event.MouseButton.Y))
@@ -112,10 +97,34 @@ bool Menu::run()
                     {
                         window.Close();
                     }
+                    else if(buttons[i].targetMenu == 1)
+                    {
+                        currMenu = buttons[i].targetMenu;
+                        reloadHighScore(guis[1]);
+                    }
                     else
                     {
                         currMenu = buttons[i].targetMenu;
                     }
+                }
+            }
+            for (unsigned int i = 0; i < switchButton.size(); ++i)
+            {
+                if(Utility::contains(switchButton[i],event.MouseButton.X, event.MouseButton.Y))
+                {
+                    if(switchButton[i].targetMenu == 0)
+                    {
+                        switchButton[i].targetMenu = 1;
+                        Storage::getInstance().setSound(true);
+                        switchButton[i].SetSubRect(sf::IntRect(0, 40, 60, 80));
+                    }
+                    else
+                    {
+                        switchButton[i].targetMenu = 0;
+                        Storage::getInstance().setSound(false);
+                        switchButton[i].SetSubRect(sf::IntRect(0, 0, 60, 40));
+                    }
+
                 }
             }
         }
@@ -138,9 +147,41 @@ void Menu::draw()
     {
         window.Draw(guis[currMenu].getTexts()[i]);
     }
+    for (unsigned int i = 0; i < guis[currMenu].getSwitchButtons().size(); ++i)
+    {
+        window.Draw(guis[currMenu].getSwitchButtons()[i]);
+    }
 
     window.Draw(crosshair);
 
     window.Display();
+}
+
+Gui& Menu::reloadHighScore(Gui& highscore)
+{
+    highscore.clearGui();
+    menutext = "HighScore";
+    highscore.addText(menutext, font, sf::Vector2f((SCREEN_SIZE_WIDTH/2)-100, 50));
+
+    menutext = "First:";
+    highscore.addText(menutext, font, sf::Vector2f((SCREEN_SIZE_WIDTH/2)-120, 150));
+
+    menutext = Utility::int2Str(config.getInt("point", 1, "Highscore1", "resources\\ini\\highscores.ini"));
+    highscore.addText(menutext, font, sf::Vector2f((SCREEN_SIZE_WIDTH/2), 150));
+
+    menutext = "Second:";
+    highscore.addText(menutext, font, sf::Vector2f((SCREEN_SIZE_WIDTH/2)-120, 200));
+
+    menutext = Utility::int2Str(config.getInt("point", 1, "Highscore2", "resources\\ini\\highscores.ini"));
+    highscore.addText(menutext, font, sf::Vector2f((SCREEN_SIZE_WIDTH/2), 200));
+
+    menutext = "Third:";
+    highscore.addText(menutext, font, sf::Vector2f((SCREEN_SIZE_WIDTH/2)-120, 250));
+
+    menutext = Utility::int2Str(config.getInt("point", 1, "Highscore3", "resources\\ini\\highscores.ini"));
+    highscore.addText(menutext, font, sf::Vector2f((SCREEN_SIZE_WIDTH/2), 250));
+
+    highscore.addButton(backImg, sf::Vector2f(SCREEN_SIZE_WIDTH/2, SCREEN_SIZE_HEIGHT-50), 0);
+    return highscore;
 }
 

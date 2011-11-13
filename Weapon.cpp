@@ -34,7 +34,6 @@ void Weapon::attack()
 {
     attackCooldown = attackSpeed;
     --ammo;
-    std::cout << ammo << std::endl;
 }
 
 int Weapon::getAmmo()

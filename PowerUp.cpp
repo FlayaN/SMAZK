@@ -4,6 +4,7 @@ int PowerUp::getHeal()
 {
     return heal;
 }
+
 float PowerUp::getSpeedScale()
 {
     return speedScale;

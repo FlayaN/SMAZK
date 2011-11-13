@@ -20,6 +20,7 @@ public:
 
     bool run();
     void draw();
+    Gui& reloadHighScore(Gui& highscore);
 private:
     sf::RenderWindow& window;
     sf::String text;
@@ -30,7 +31,7 @@ private:
     std::string menutext;
     Config config;
     //Gui mainscreen, highscore, options, exit, back;
-    sf::Image newgameImg, highscoreImg, optionsImg, aboutImg, exitImg, backImg;
+    sf::Image newgameImg, highscoreImg, optionsImg, aboutImg, exitImg, backImg, soundImg;
     int currMenu;
     sf::Font font;
 };

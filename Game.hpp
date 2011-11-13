@@ -33,7 +33,7 @@ class Game
 {
 public:
     Game(sf::RenderWindow& window);
-
+    ~Game();
     void initStorage();
     bool run();
     void draw();
@@ -70,6 +70,7 @@ private:
     sf::String text;
     sf::RenderWindow& window;
     sf::Event event;
+    sf::Shape playerHp, hpBg;
     sf::Sprite crosshair, bg;
     sf::Image playerImg,crosshairImg,PBulletImg, bgImg;
 };

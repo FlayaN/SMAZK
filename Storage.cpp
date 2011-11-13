@@ -4,6 +4,7 @@
 Storage::Storage()
 {
     random.SetSeed(time(0));
+    sound = true;
 }
 
 Storage::Storage& Storage::getInstance()
@@ -219,6 +220,16 @@ sf::Image& Storage::getImage(std::string name)
     return (*imagemap.find(name)).second;
 }
 
+void Storage::setSound(bool sound)
+{
+    this->sound = sound;
+}
+
+bool Storage::isSoundOn()
+{
+    return sound;
+}
+
 float Storage::getRandom(float begin, float end)
 {
     return random.Random(begin, end);
@@ -227,4 +238,17 @@ float Storage::getRandom(float begin, float end)
 int Storage::getRandom(int begin, int end)
 {
     return random.Random(begin, end);
+}
+
+void Storage::resetStorage()
+{
+    enemies.clear();
+    projectiles.clear();
+    particles.clear();
+    weapons.clear();
+    decals.clear();
+    waves.clear();
+    powerups.clear();
+    highscores.clear();
+    imagemap.clear();
 }
