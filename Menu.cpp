@@ -16,8 +16,6 @@ Menu::Menu(sf::RenderWindow& window)
     soundImg.LoadFromFile("resources\\images\\Sound.png");
     font.LoadFromFile("resources\\menutext.ttf");
 
-    Storage::getInstance().setHighScoreType(config.getHighScores());
-
     bg.SetImage(bgImg);
 
     crosshair.SetImage(crosshairImg);

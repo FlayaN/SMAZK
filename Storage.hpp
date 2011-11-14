@@ -5,7 +5,6 @@
 #include "DecalType.hpp"
 #include "WaveType.hpp"
 #include "PowerUpType.hpp"
-#include "HighScoreType.hpp"
 #include "SFML/Graphics.hpp"
 
 #include <string>
@@ -48,9 +47,6 @@ public:
     WaveType getWaveType(int index);
     void setWaveTypes(std::vector<WaveType> v);
 
-    HighScoreType getHighScoreType(int index);
-    void setHighScoreType(std::vector<HighScoreType> v);
-
     void setImages();
     sf::Image& getImage(std::string name);
 
@@ -75,7 +71,6 @@ private:
     std::vector<DecalType> decals;
     std::vector<WaveType> waves;
     std::vector<PowerUpType> powerups;
-    std::vector<HighScoreType> highscores;
 
     std::map<std::string, sf::Image> imagemap;
 

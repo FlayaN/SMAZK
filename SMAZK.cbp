@@ -52,7 +52,6 @@
 		<Unit filename="Gui.hpp" />
 		<Unit filename="GuiButton.cpp" />
 		<Unit filename="GuiButton.hpp" />
-		<Unit filename="HighScoreType.hpp" />
 		<Unit filename="Menu.cpp" />
 		<Unit filename="Menu.hpp" />
 		<Unit filename="MovingEntity.cpp" />

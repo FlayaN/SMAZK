@@ -128,6 +128,7 @@ std::vector<PowerUpType> Config::getPowerUps()
             powerup.name = getString("name", "", section, path);
             powerup.model = ("resources\\images\\" + getString("model", "", section, path));
             powerup.sound = ("resources\\sounds\\" + getString("sound", "", section, path));
+            powerup.instant = getBool("instant", false, section, path);
 
             v.push_back(powerup);
             ss.str("");
@@ -212,6 +213,7 @@ std::vector<WaveType> Config::getWaves()
     std::cout << "Waves: " << getInt("number", 1, "init", path) << std::endl;
     char section[32];
     char section2[32];
+
     try{
         for(int i = 1; i <= getInt("number", 1, "init", path); i++)
         {
@@ -220,52 +222,36 @@ std::vector<WaveType> Config::getWaves()
             ss << i;
             ss >> section;
 
-            wave.total = getInt("numberofenemys", 1, section, path);
+            //wave.total = getInt("numberofenemys", 1, section, path);
             wave.types = getInt("typesofenemys", 1, section, path);
 
             for(int j = 1; j <= wave.types; ++j)
             {
-                ss2 << "Enemy";
+                ss2 << "enemy";
                 ss2 << j;
                 ss2 >> section2;
 
-                wave.enemys.push_back(getString(section2, "", section, path));
+                wave.typeOfEnemy.push_back(getString(section2, "", section, path));
 
                 ss2.str("");
                 ss2.clear();
             }
+            int tmp_totalenemies = 0;
+            for(int j = 1; j <= wave.types; ++j)
+            {
+                ss2 << "count";
+                ss2 << j;
+                ss2 >> section2;
+                int tmp_int = getInt(section2, 1, section, path);
+                wave.countOfEnemy.push_back(tmp_int);
+                tmp_totalenemies += tmp_int;
+                ss2.str("");
+                ss2.clear();
+            }
+
+            wave.total = tmp_totalenemies;
 
             v.push_back(wave);
-            ss.str("");
-            ss.clear();
-        }
-    }
-    catch(...)
-    {
-        std::cout << "error";
-    }
-    return v;
-}
-
-std::vector<HighScoreType> Config::getHighScores()
-{
-    std::vector<HighScoreType> v;
-    HighScoreType highscore;
-    std::stringstream ss;
-    char* path = "resources\\ini\\highscores.ini";
-    std::cout << "Highscores: " << getInt("number", 1, "init", path) << std::endl;
-    char section[32];
-    try{
-        for(int count = 1; count <= 3; count++)
-        {
-            ss << "Highscore";
-            ss << count;
-            ss >> section;
-
-            highscore.point = getInt("point", 1, section, path);
-            highscore.order = getInt("order", 1, section, path);
-
-            v.push_back(highscore);
             ss.str("");
             ss.clear();
         }

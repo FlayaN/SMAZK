@@ -24,3 +24,10 @@ void PowerUp::setDamageScale(float damageScale)
 {
     this->damageScale = damageScale;
 }
+
+bool PowerUp::isInstant()
+{
+    return instant;
+}
+
+

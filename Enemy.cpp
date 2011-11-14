@@ -16,3 +16,8 @@ std::string Enemy::getDecal()
     return decal;
 }
 
+int Enemy::getDmg()
+{
+    return dmg;
+}
+

@@ -61,17 +61,17 @@ private:
 
     Player player;
     Config config;
-    int waves, currWave;
-    float elapsedTime, gameTime;
-    bool finished;
+    int waves, currWave, frameHelp, gameScore;
+    float elapsedTime, gameTime, frameTime;
+    bool finished, victory;
 
     sf::Clock clock;
     sf::Font font;
-    sf::String text;
+    sf::String scoreText, ammoText, fpsText, waveText, enemysText, victoryText;
     sf::RenderWindow& window;
     sf::Event event;
     sf::Shape playerHp, hpBg;
-    sf::Sprite crosshair, bg;
-    sf::Image playerImg,crosshairImg,PBulletImg, bgImg;
+    sf::Sprite crosshair, bg, hpHud, weaponHud;
+    sf::Image playerImg,crosshairImg,PBulletImg, bgImg, hpHudImg, weaponHudImg;
 };
 #endif

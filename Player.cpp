@@ -1,9 +1,16 @@
 #include "Player.hpp"
 
+Player::Player(float speed, int hp, Weapon weapon)
+    : MovingEntity(speed), hp(hp), powerUpDuration(0)
+{
+    setWeapon(weapon);
+}
+
 int Player::getHp()
 {
     return hp;
 }
+
 void Player::setHp(int hp)
 {
     this->hp = hp;
@@ -18,6 +25,7 @@ Weapon& Player::getWeapon()
 void Player::setWeapon(Weapon weapon)
 {
     this->weapon = weapon;
+    this->weapon.SetPosition(SCREEN_SIZE_WIDTH-80,SCREEN_SIZE_HEIGHT-50);
 }
 
 float Player::getDmg()
@@ -43,7 +51,7 @@ void Player::updateTimers(float elapsedTime)
 
 void Player::attack()
 {
-    if(weapon.getAmmo() == 0) weapon = Weapon(Storage::getInstance().getWeaponType(0), sf::Vector2f(MovingEntity::GetPosition()), MovingEntity::GetRotation());
+    if(weapon.getAmmo() == 0) setWeapon(Weapon(Storage::getInstance().getWeaponType(0), sf::Vector2f(MovingEntity::GetPosition()), 0));
     weapon.attack();
 }
 

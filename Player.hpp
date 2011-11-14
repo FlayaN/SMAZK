@@ -5,14 +5,15 @@
 #ifndef PLAYERqqq
 #define PLAYERqqq
 
+#define SCREEN_SIZE_WIDTH 1280
+#define SCREEN_SIZE_HEIGHT 720
+
 class Player : public MovingEntity
 {
 public:
     Player(){}
 
-    Player(float speed, int hp, Weapon weapon)
-    : weapon(weapon), MovingEntity(speed), hp(hp), powerUpDuration(0) {}
-
+    Player(float speed, int hp, Weapon weapon);
     int getHp();
     void setHp(int hp);
 

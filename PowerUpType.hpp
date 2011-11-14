@@ -9,5 +9,6 @@ public:
     float speedScale;
     int heal;
     std::string sound;
+    bool instant;
 };
 #endif

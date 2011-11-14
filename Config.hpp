@@ -5,7 +5,6 @@
 #include "DecalType.hpp"
 #include "ParticleType.hpp"
 #include "WaveType.hpp"
-#include "HighScoreType.hpp"
 #include <vector>
 #include <string>
 #ifndef CONFIGqqq
@@ -20,7 +19,6 @@ public:
     std::vector<DecalType> getDecals();
     std::vector<ParticleType> getParticles();
     std::vector<WaveType> getWaves();
-    std::vector<HighScoreType> getHighScores();
 
     int getInt(char* key, int defaultValue, char* category, char* fileName);
     float getFloat(char* key, float defaultValue, char* category, char* fileName);
