@@ -125,6 +125,10 @@ void Game::draw()
     {
         window.Draw(decals[i]);
     }
+    for (unsigned int i = 0; i < particles.size(); ++i)
+    {
+        window.Draw(particles[i]);
+    }
     for (unsigned int i = 0; i < powerups.size(); ++i)
     {
         window.Draw(powerups[i]);
@@ -141,10 +145,7 @@ void Game::draw()
     {
         window.Draw(projectiles[i]);
     }
-    for (unsigned int i = 0; i < particles.size(); ++i)
-    {
-        window.Draw(particles[i]);
-    }
+
     window.Draw(player);
     window.Draw(crosshair);
     window.Draw(ammoText);
@@ -352,9 +353,16 @@ void Game::collide()
             v = Utility::calcDistanceV(enemies[i].GetPosition(),projectiles[j].GetPosition());
             if(v.x <= (projectiles[j].GetSize().x+enemies[i].GetSize().x)/2 && v.y <= (projectiles[j].GetSize().y+enemies[i].GetSize().y)/2)
             {
-                enemies[i].setHp(enemies[i].getHp()-projectiles[j].getDmg());
                 generateBloodParticle(projectiles[j].GetPosition(),projectiles[j].GetRotation(), Storage::getInstance().getParticleType(0));
-                projectiles[j].setDead();
+                if(projectiles[j].isPiercing())
+                {
+                    enemies[i].setHp(enemies[i].getHp()-(projectiles[j].getDmg()*60)*elapsedTime);
+                }
+                else
+                {
+                    enemies[i].setHp(enemies[i].getHp()-projectiles[j].getDmg());
+                    projectiles[j].setDead();
+                }
                 enemies[i].playSound();
                 if(enemies[i].getHp() <= 0)
                 {
@@ -395,6 +403,13 @@ void Game::collide()
             weapons[i].setDead();
         }
     }
+    for(unsigned int i = 0; i < projectiles.size(); ++i)
+    {
+        if(projectiles[i].GetPosition().x <= 0 || projectiles[i].GetPosition().x >= SCREEN_SIZE_WIDTH || projectiles[i].GetPosition().y <= 0 || projectiles[i].GetPosition().y >= SCREEN_SIZE_HEIGHT)
+        {
+            projectiles[i].setDead();
+        }
+    }
 }
 
 void Game::updateTimers()
@@ -409,13 +424,6 @@ void Game::updateTimers()
 
 void Game::killObjects()
 {
-    for(unsigned int i = 0; i < projectiles.size(); ++i)
-    {
-        if(projectiles[i].GetPosition().x <= 0 || projectiles[i].GetPosition().x >= SCREEN_SIZE_WIDTH || projectiles[i].GetPosition().y <= 0 || projectiles[i].GetPosition().y >= SCREEN_SIZE_HEIGHT)
-        {
-            projectiles[i].setDead();
-        }
-    }
     projectiles.erase(std::remove_if(projectiles.begin(),projectiles.end(),movingEntity::isDead),projectiles.end());
     enemies.erase(std::remove_if(enemies.begin(),enemies.end(),movingEntity::isDead),enemies.end());
     particles.erase(std::remove_if(particles.begin(),particles.end(),movingEntity::isDead),particles.end());

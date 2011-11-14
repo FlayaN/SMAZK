@@ -53,6 +53,9 @@ public:
     void setSound(bool sound);
     bool isSoundOn();
 
+    void setGraphicsHigh(bool sound);
+    bool isGraphicsHigh();
+
     float getRandom(float begin, float end);
     int getRandom(int begin, int end);
 
@@ -75,6 +78,6 @@ private:
     std::map<std::string, sf::Image> imagemap;
 
     sf::Randomizer random;
-    bool sound;
+    bool sound, graphics;
 };
 #endif

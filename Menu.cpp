@@ -13,7 +13,7 @@ Menu::Menu(sf::RenderWindow& window)
     aboutImg.LoadFromFile("resources\\images\\About.png");
     exitImg.LoadFromFile("resources\\images\\Exit.png");
     backImg.LoadFromFile("resources\\images\\Back.png");
-    soundImg.LoadFromFile("resources\\images\\Sound.png");
+    onoffImg.LoadFromFile("resources\\images\\OnOffSwitch.png");
     font.LoadFromFile("resources\\menutext.ttf");
 
     bg.SetImage(bgImg);
@@ -41,7 +41,11 @@ Menu::Menu(sf::RenderWindow& window)
 
     menutext = "Sound";
     options.addText(menutext, font, sf::Vector2f((SCREEN_SIZE_WIDTH/2)-70, 150));
-    options.addSwitchButton(soundImg, sf::Vector2f((SCREEN_SIZE_WIDTH/2-20), 230), 1);
+    options.addSwitchButton(onoffImg, sf::Vector2f((SCREEN_SIZE_WIDTH/2-20), 230), 1);
+
+    menutext = "High Graphics";
+    options.addText(menutext, font, sf::Vector2f((SCREEN_SIZE_WIDTH/2)-70, 250));
+    options.addSwitchButton(onoffImg, sf::Vector2f((SCREEN_SIZE_WIDTH/2-20), 330), 2);
 
     guis.push_back(options);
 
@@ -116,11 +120,23 @@ bool Menu::run()
                         Storage::getInstance().setSound(true);
                         switchButton[i].SetSubRect(sf::IntRect(0, 40, 60, 80));
                     }
-                    else
+                    else if(switchButton[i].targetMenu == 1)
                     {
                         switchButton[i].targetMenu = 0;
                         Storage::getInstance().setSound(false);
                         switchButton[i].SetSubRect(sf::IntRect(0, 0, 60, 40));
+                    }
+                    else if(switchButton[i].targetMenu == 2)
+                    {
+                        switchButton[i].targetMenu = 3;
+                        Storage::getInstance().setGraphicsHigh(false);
+                        switchButton[i].SetSubRect(sf::IntRect(0, 0, 60, 40));
+                    }
+                    else if(switchButton[i].targetMenu == 3)
+                    {
+                        switchButton[i].targetMenu = 2;
+                        Storage::getInstance().setGraphicsHigh(true);
+                        switchButton[i].SetSubRect(sf::IntRect(0, 40, 60, 80));
                     }
 
                 }

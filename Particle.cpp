@@ -18,6 +18,9 @@ void Particle::updateTimers(float elapsedTime)
     duration -= elapsedTime;
     if (duration < 0)
     {
-        setDead();
+        if(Storage::getInstance().isGraphicsHigh())
+            MovingEntity::setSpeed(0);
+        else
+            setDead();
     }
 }

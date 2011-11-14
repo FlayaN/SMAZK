@@ -73,5 +73,6 @@ private:
     sf::Shape playerHp, hpBg;
     sf::Sprite crosshair, bg, hpHud, weaponHud;
     sf::Image playerImg,crosshairImg,PBulletImg, bgImg, hpHudImg, weaponHudImg;
+    sf::Music music;
 };
 #endif

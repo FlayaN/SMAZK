@@ -5,6 +5,7 @@ Storage::Storage()
 {
     random.SetSeed(time(0));
     sound = true;
+    graphics = true;
 }
 
 Storage::Storage& Storage::getInstance()
@@ -218,6 +219,16 @@ void Storage::setSound(bool sound)
 bool Storage::isSoundOn()
 {
     return sound;
+}
+
+void Storage::setGraphicsHigh(bool graphics)
+{
+    this->graphics = graphics;
+}
+
+bool Storage::isGraphicsHigh()
+{
+    return graphics;
 }
 
 float Storage::getRandom(float begin, float end)

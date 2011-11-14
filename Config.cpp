@@ -62,6 +62,8 @@ std::vector<ProjectileType> Config::getProjectiles()
             projectile.scale = getFloat("scale", 1.0F, section, path);
             projectile.speed = getFloat("speed", 1.0F, section, path);
             projectile.particle = getString("particle", "", section, path);
+            projectile.piercing = getBool("piercing", false, section, path);
+
 
             v.push_back(projectile);
             ss.str("");

@@ -8,5 +8,6 @@ public:
     float speed;
     int damage;
     std::string particle;
+    bool piercing;
 };
 #endif

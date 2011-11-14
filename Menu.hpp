@@ -30,8 +30,7 @@ private:
     std::vector<Gui> guis;
     std::string menutext;
     Config config;
-    //Gui mainscreen, highscore, options, exit, back;
-    sf::Image newgameImg, highscoreImg, optionsImg, aboutImg, exitImg, backImg, soundImg;
+    sf::Image newgameImg, highscoreImg, optionsImg, aboutImg, exitImg, backImg, onoffImg;
     int currMenu;
     sf::Font font;
 };
