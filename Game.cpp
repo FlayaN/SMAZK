@@ -10,7 +10,6 @@
 Game::Game(sf::RenderWindow& window)
     : window(window)
 {
-    std::cout<<"hejsan\n";
     playerImg.LoadFromFile("resources\\images\\player.png");
     crosshairImg.LoadFromFile("resources\\images\\crosshair.png");
     bgImg.LoadFromFile("resources\\images\\floor.png");
@@ -209,7 +208,10 @@ void Game::spawn()
     if(enemies.size() == 0 && currWave + 1 < waves)
     {
         ++currWave;
-        improveFramerate();
+        if(Storage::getInstance().isImproveFramerate())
+        {
+            improveFramerate();
+        }
         WaveType tmp_wave = Storage::getInstance().getWaveType(currWave);
         //int enemyTypesPerWave = tmp_wave.total/tmp_wave.types;
         for (int i = 0; i < tmp_wave.types; ++i)
@@ -502,7 +504,6 @@ void Game::improveFramerate()
         window.Draw(particles[i]);
     }
     particles.clear();
-
     bgImg = window.Capture();
     bg.SetImage(bgImg);
 }

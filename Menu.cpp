@@ -44,8 +44,12 @@ Menu::Menu(sf::RenderWindow& window)
     options.addSwitchButton(onoffImg, sf::Vector2f((SCREEN_SIZE_WIDTH/2-20), 230), 1);
 
     menutext = "High Graphics";
-    options.addText(menutext, font, sf::Vector2f((SCREEN_SIZE_WIDTH/2)-70, 250));
+    options.addText(menutext, font, sf::Vector2f((SCREEN_SIZE_WIDTH/2)-110, 250));
     options.addSwitchButton(onoffImg, sf::Vector2f((SCREEN_SIZE_WIDTH/2-20), 330), 2);
+
+    menutext = "Improve Framerate";
+    options.addText(menutext, font, sf::Vector2f((SCREEN_SIZE_WIDTH/2)-150, 350));
+    options.addSwitchButton(onoffImg, sf::Vector2f((SCREEN_SIZE_WIDTH/2-20), 430), 4);
 
     guis.push_back(options);
 
@@ -136,6 +140,18 @@ bool Menu::run()
                     {
                         switchButton[i].targetMenu = 2;
                         Storage::getInstance().setGraphicsHigh(true);
+                        switchButton[i].SetSubRect(sf::IntRect(0, 40, 60, 80));
+                    }
+                    else if(switchButton[i].targetMenu == 4)
+                    {
+                        switchButton[i].targetMenu = 5;
+                        Storage::getInstance().setImproveFramerate(false);
+                        switchButton[i].SetSubRect(sf::IntRect(0, 0, 60, 40));
+                    }
+                    else if(switchButton[i].targetMenu == 5)
+                    {
+                        switchButton[i].targetMenu = 4;
+                        Storage::getInstance().setImproveFramerate(true);
                         switchButton[i].SetSubRect(sf::IntRect(0, 40, 60, 80));
                     }
 

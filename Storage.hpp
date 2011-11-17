@@ -56,6 +56,9 @@ public:
     void setGraphicsHigh(bool sound);
     bool isGraphicsHigh();
 
+    void setImproveFramerate(bool framerate);
+    bool isImproveFramerate();
+
     float getRandom(float begin, float end);
     int getRandom(int begin, int end);
 
@@ -78,6 +81,6 @@ private:
     std::map<std::string, sf::Image> imagemap;
 
     sf::Randomizer random;
-    bool sound, graphics;
+    bool sound, graphics, framerate;
 };
 #endif

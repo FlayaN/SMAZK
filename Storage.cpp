@@ -231,6 +231,16 @@ bool Storage::isGraphicsHigh()
     return graphics;
 }
 
+void Storage::setImproveFramerate(bool framerate)
+{
+    this->framerate = framerate;
+}
+
+bool Storage::isImproveFramerate()
+{
+    return framerate;
+}
+
 float Storage::getRandom(float begin, float end)
 {
     return random.Random(begin, end);
