@@ -209,6 +209,7 @@ void Game::spawn()
     if(enemies.size() == 0 && currWave + 1 < waves)
     {
         ++currWave;
+        improveFramerate();
         WaveType tmp_wave = Storage::getInstance().getWaveType(currWave);
         //int enemyTypesPerWave = tmp_wave.total/tmp_wave.types;
         for (int i = 0; i < tmp_wave.types; ++i)
@@ -484,4 +485,24 @@ void Game::generateDecal(Enemy& enemy, DecalType dt)
 {
     decals.push_back(Decal(dt, enemy.GetPosition(), enemy.GetRotation(), enemy.GetScale()));
     decals.rbegin()->playSound();
+}
+
+void Game::improveFramerate()
+{
+    window.Clear();
+    window.Draw(bg);
+
+    for (unsigned int i = 0; i < decals.size(); ++i)
+    {
+        window.Draw(decals[i]);
+    }
+    decals.clear();
+    for (unsigned int i = 0; i < particles.size(); ++i)
+    {
+        window.Draw(particles[i]);
+    }
+    particles.clear();
+
+    bgImg = window.Capture();
+    bg.SetImage(bgImg);
 }

@@ -45,6 +45,7 @@ public:
     void updateTimers();
     void killObjects();
     void highScore(int score);
+    void improveFramerate();
 
     void generateBloodParticle(sf::Vector2f pos, float rot, ParticleType pt);
     void generateShellParticle(sf::Vector2f pos, float rot, ParticleType pt);
