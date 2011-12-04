@@ -224,16 +224,16 @@ void Game::spawn()
                 switch(randInt)
                 {
                 case 0:
-                    pos = sf::Vector2f(Storage::getInstance().getRandom(-100, 0), Storage::getInstance().getRandom(0, SCREEN_SIZE_HEIGHT));
+                    pos = sf::Vector2f(Storage::getInstance().getRandom(-30*tmp_wave.countOfEnemy[i], 0), Storage::getInstance().getRandom(0, SCREEN_SIZE_HEIGHT));
                     break;
                 case 1:
-                    pos = sf::Vector2f(Storage::getInstance().getRandom(SCREEN_SIZE_WIDTH, SCREEN_SIZE_WIDTH+100), Storage::getInstance().getRandom(0, SCREEN_SIZE_HEIGHT));
+                    pos = sf::Vector2f(Storage::getInstance().getRandom(SCREEN_SIZE_WIDTH, SCREEN_SIZE_WIDTH+30*tmp_wave.countOfEnemy[i]), Storage::getInstance().getRandom(0, SCREEN_SIZE_HEIGHT));
                     break;
                 case 2:
-                    pos = sf::Vector2f(Storage::getInstance().getRandom(0, SCREEN_SIZE_WIDTH), Storage::getInstance().getRandom(-100,0));
+                    pos = sf::Vector2f(Storage::getInstance().getRandom(0, SCREEN_SIZE_WIDTH), Storage::getInstance().getRandom(-30*tmp_wave.countOfEnemy[i],0));
                     break;
                 default:
-                    pos = sf::Vector2f(Storage::getInstance().getRandom(0, SCREEN_SIZE_WIDTH),Storage::getInstance().getRandom(SCREEN_SIZE_HEIGHT,SCREEN_SIZE_HEIGHT+100));
+                    pos = sf::Vector2f(Storage::getInstance().getRandom(0, SCREEN_SIZE_WIDTH),Storage::getInstance().getRandom(SCREEN_SIZE_HEIGHT,SCREEN_SIZE_HEIGHT+30*tmp_wave.countOfEnemy[i]));
                     break;
                 }
                 enemies.push_back(Enemy(Storage::getInstance().getEnemyType(tmp_wave.typeOfEnemy[i]), pos));
