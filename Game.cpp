@@ -79,7 +79,7 @@ void Game::initStorage()
     fpsText.SetFont(font);
     fpsText.SetSize(50);
     fpsText.SetColor(sf::Color(255, 0, 0, 255));
-    fpsText.SetPosition(SCREEN_SIZE_WIDTH - 150, 5);
+    fpsText.SetPosition(SCREEN_SIZE_WIDTH - 170, 5);
 
     ammoText.SetFont(font);
     ammoText.SetSize(50);

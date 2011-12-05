@@ -20,7 +20,7 @@ int main()
 
     // Create the main rendering window
     sf::RenderWindow window(sf::VideoMode(SCREEN_SIZE_WIDTH, SCREEN_SIZE_HEIGHT, SCREEN_BIT_SIZE), "Super Mega Awesome Zombie Killer");
-    window.UseVerticalSync(true);
+    window.SetFramerateLimit(100);//UseVerticalSync(true);
     window.ShowMouseCursor(false);
 
     Menu menu(window);
